@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Timetable Manager (Pro UI) v1.2</title>
+    <title>School Timetable Manager (Pro UI)</title>
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234f46e5%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><rect x=%223%22 y=%224%22 width=%2218%22 height=%2218%22 rx=%222%22 ry=%222%22></rect><line x1=%2216%22 y1=%222%22 x2=%2216%22 y2=%226%22></line><line x1=%228%22 y1=%222%22 x2=%228%22 y2=%226%22></line><line x1=%223%22 y1=%2210%22 x2=%2221%22 y2=%2210%22></line><line x1=%229%22 y1=%2210%22 x2=%229%22 y2=%2222%22></line><line x1=%2215%22 y1=%2210%22 x2=%2215%22 y2=%2222%22></line></svg>" />
@@ -89,25 +89,20 @@
             '금': 'Friday', '토': 'Saturday', '일': 'Sunday'
           };
 
-        // --- License Modal Component ---
+        // --- License Modal ---
         const LicenseModal = ({ onAgree }) => {
             const [checked, setChecked] = useState(false);
-
             return (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center modal-backdrop">
                     <div className="absolute inset-0 bg-gray-900 bg-opacity-90 backdrop-blur-md"></div>
                     <div className="bg-white p-8 rounded-2xl shadow-2xl z-10 max-w-lg w-full mx-4 border border-gray-200 relative">
                         <div className="text-center mb-6">
-                            <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Icon path={ICONS.bookOpen} size={32} />
-                            </div>
+                            <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4"><Icon path={ICONS.bookOpen} size={32} /></div>
                             <h1 className="text-2xl font-bold text-gray-800 mb-2">School Timetable Manager</h1>
                             <p className="text-sm text-gray-500">오픈 소스 시간표 관리 프로그램</p>
                         </div>
                         <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mb-6 text-sm text-gray-600 leading-relaxed">
-                            <h3 className="font-bold text-gray-800 mb-2 flex items-center gap-2">
-                                <Icon path={ICONS.lock} size={16} /> 라이선스 안내 (CC BY-NC-ND 4.0)
-                            </h3>
+                            <h3 className="font-bold text-gray-800 mb-2 flex items-center gap-2"><Icon path={ICONS.lock} size={16} /> 라이선스 안내 (CC BY-NC-ND 4.0)</h3>
                             <p className="mb-3">Github 배포 / Creative Commons BY-NC-ND 4.0 라이선스</p>
                             <ul className="list-disc pl-5 space-y-1 mb-3 text-xs">
                                 <li><strong>저작자 표시 (Attribution):</strong> 원작자를 표시해야 합니다.</li>
@@ -128,87 +123,41 @@
             );
         };
 
-        // --- Add Class Modal (New) ---
+        // --- Add Class Modal ---
         const AddClassModal = ({ onClose, onAdd, rooms }) => {
-            const [form, setForm] = useState({
-                type: 'General',
-                level: '',
-                instructor: '',
-                day: '월',
-                startTime: '14:00',
-                endTime: '16:00',
-                count: 0,
-                studentType: 'All',
-                roomId: ''
-            });
-
+            const [form, setForm] = useState({ type: 'General', level: '', instructor: '', day: '월', startTime: '14:00', endTime: '16:00', count: 0, studentType: 'All', roomId: '' });
             const handleChange = (field, value) => setForm(prev => ({ ...prev, [field]: value }));
-
             const handleSubmit = () => {
                 if(!form.level || !form.instructor) return alert("강의명(Level)과 강사명은 필수입니다.");
-                onAdd(form);
-                onClose();
+                onAdd(form); onClose();
             };
-
             return (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose}></div>
                     <div className="bg-white w-full max-w-md rounded-xl shadow-2xl z-10 overflow-hidden">
                         <div className="p-4 bg-indigo-50 border-b border-indigo-100 flex justify-between items-center">
-                            <h3 className="font-bold text-indigo-800 flex items-center gap-2"><Icon path={ICONS.plus} size={18} /> 새 강의 추가</h3>
+                            <h3 className="font-bold text-indigo-800 flex items-center gap-2"><Icon path={ICONS.plus} size={18} /> New Lecture</h3>
                             <button onClick={onClose} className="text-indigo-400 hover:text-indigo-600"><Icon path={ICONS.x} size={20} /></button>
                         </div>
                         <div className="p-6 space-y-4">
                             <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-500 mb-1">Type</label>
-                                    <input className="w-full p-2 border rounded text-sm" value={form.type} onChange={e => handleChange('type', e.target.value)} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-500 mb-1">Student Type</label>
-                                    <input className="w-full p-2 border rounded text-sm" value={form.studentType} onChange={e => handleChange('studentType', e.target.value)} />
-                                </div>
+                                <div><label className="block text-xs font-bold text-gray-500 mb-1">Type</label><input className="w-full p-2 border rounded text-sm" value={form.type} onChange={e => handleChange('type', e.target.value)} /></div>
+                                <div><label className="block text-xs font-bold text-gray-500 mb-1">Student Type</label><input className="w-full p-2 border rounded text-sm" value={form.studentType} onChange={e => handleChange('studentType', e.target.value)} /></div>
                             </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 mb-1">Level (강의명)</label>
-                                <input className="w-full p-2 border rounded text-sm" placeholder="예: Calculus 101" value={form.level} onChange={e => handleChange('level', e.target.value)} />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 mb-1">Instructor</label>
-                                <input className="w-full p-2 border rounded text-sm" placeholder="강사 이름" value={form.instructor} onChange={e => handleChange('instructor', e.target.value)} />
-                            </div>
+                            <div><label className="block text-xs font-bold text-gray-500 mb-1">Level (Class Name)</label><input className="w-full p-2 border rounded text-sm" placeholder="e.g. Calculus 101" value={form.level} onChange={e => handleChange('level', e.target.value)} /></div>
+                            <div><label className="block text-xs font-bold text-gray-500 mb-1">Instructor</label><input className="w-full p-2 border rounded text-sm" placeholder="Instructor Name" value={form.instructor} onChange={e => handleChange('instructor', e.target.value)} /></div>
                              <div className="grid grid-cols-3 gap-4">
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-500 mb-1">Day</label>
-                                    <select className="w-full p-2 border rounded text-sm" value={form.day} onChange={e => handleChange('day', e.target.value)}>
-                                        {DAYS.map(d => <option key={d} value={d}>{d}</option>)}
-                                    </select>
-                                </div>
+                                <div><label className="block text-xs font-bold text-gray-500 mb-1">Day</label><select className="w-full p-2 border rounded text-sm" value={form.day} onChange={e => handleChange('day', e.target.value)}>{DAYS.map(d => <option key={d} value={d}>{d}</option>)}</select></div>
                                 <div className="col-span-2 grid grid-cols-2 gap-2">
-                                    <div>
-                                        <label className="block text-xs font-bold text-gray-500 mb-1">Start</label>
-                                        <input type="time" className="w-full p-2 border rounded text-sm" value={form.startTime} onChange={e => handleChange('startTime', e.target.value)} />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-bold text-gray-500 mb-1">End</label>
-                                        <input type="time" className="w-full p-2 border rounded text-sm" value={form.endTime} onChange={e => handleChange('endTime', e.target.value)} />
-                                    </div>
+                                    <div><label className="block text-xs font-bold text-gray-500 mb-1">Start</label><input type="time" className="w-full p-2 border rounded text-sm" value={form.startTime} onChange={e => handleChange('startTime', e.target.value)} /></div>
+                                    <div><label className="block text-xs font-bold text-gray-500 mb-1">End</label><input type="time" className="w-full p-2 border rounded text-sm" value={form.endTime} onChange={e => handleChange('endTime', e.target.value)} /></div>
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-500 mb-1">Students</label>
-                                    <input type="number" className="w-full p-2 border rounded text-sm" value={form.count} onChange={e => handleChange('count', e.target.value)} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-gray-500 mb-1">Room (Optional)</label>
-                                    <select className="w-full p-2 border rounded text-sm" value={form.roomId} onChange={e => handleChange('roomId', e.target.value)}>
-                                        <option value="">-- Unassigned --</option>
-                                        {rooms.map(r => <option key={r} value={r}>{r}</option>)}
-                                    </select>
-                                </div>
+                                <div><label className="block text-xs font-bold text-gray-500 mb-1">Students</label><input type="number" className="w-full p-2 border rounded text-sm" value={form.count} onChange={e => handleChange('count', e.target.value)} /></div>
+                                <div><label className="block text-xs font-bold text-gray-500 mb-1">Room (Optional)</label><select className="w-full p-2 border rounded text-sm" value={form.roomId} onChange={e => handleChange('roomId', e.target.value)}><option value="">-- Unassigned --</option>{rooms.map(r => <option key={r} value={r}>{r}</option>)}</select></div>
                             </div>
-                            <button onClick={handleSubmit} className="w-full py-2 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition-colors shadow-md mt-2">추가하기</button>
+                            <button onClick={handleSubmit} className="w-full py-2 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition-colors shadow-md mt-2">Add Class</button>
                         </div>
                     </div>
                 </div>
@@ -227,47 +176,27 @@
                         <div className="flex items-center gap-2">
                             {fullWidth && <span className="text-xs opacity-60 font-normal mr-2">{START_HOUR}:00 - {END_HOUR}:00</span>}
                             
-                            {/* --- Contextual Excel Export Button (Dashboard View) --- */}
+                            {/* --- Contextual Excel Export (Dashboard) --- */}
                             {!fullWidth && (
-                                <button 
-                                    onClick={() => onExportExcel(day)}
-                                    className="flex items-center gap-1 px-2 py-1 bg-green-50 text-green-700 hover:bg-green-100 border border-green-200 rounded text-xs transition-colors"
-                                    title={`${day}요일 시간표 엑셀 복사`}
-                                >
+                                <button onClick={() => onExportExcel(day)} className="flex items-center gap-1 px-2 py-1 bg-green-50 text-green-700 hover:bg-green-100 border border-green-200 rounded text-xs transition-colors" title="Copy Excel for this day">
                                     <Icon path={ICONS.download} size={12} />
-                                    <span className="hidden sm:inline">일일 엑셀 복사</span>
+                                    <span className="hidden sm:inline">Copy Daily Excel</span>
                                 </button>
                             )}
                         </div>
                     </div>
-                    
                     <div className="flex-1 overflow-x-auto overflow-y-auto p-2 relative">
                         <div className="min-w-[600px]" style={{ minWidth: fullWidth ? '100%' : '600px' }}>
-                            {/* Header */}
                             <div className="flex border-b-2 border-gray-200 pb-2 mb-2 sticky top-0 bg-white z-10">
                                 <div className="w-12 flex-shrink-0"></div> 
-                                {rooms.map(room => (
-                                    <div key={room} className="flex-1 text-center font-bold text-gray-700 text-sm truncate px-1">
-                                        {room}
-                                    </div>
-                                ))}
+                                {rooms.map(room => <div key={room} className="flex-1 text-center font-bold text-gray-700 text-sm truncate px-1">{room}</div>)}
                             </div>
-
-                            {/* Grid Body */}
                             <div className="relative" style={{ height: '500px' }}>
-                                {/* Time Markers */}
                                 {Array.from({ length: (END_HOUR - START_HOUR) + 1 }).map((_, i) => {
                                     const hour = START_HOUR + i;
                                     const topPct = (i / (END_HOUR - START_HOUR)) * 100;
-                                    return (
-                                        <div key={i} className="absolute w-full flex items-center pointer-events-none" style={{ top: `${topPct}%` }}>
-                                            <div className="w-12 text-xs text-gray-400 text-right pr-2 -mt-2">{hour}:00</div>
-                                            <div className="flex-1 h-px bg-gray-100"></div>
-                                        </div>
-                                    );
+                                    return (<div key={i} className="absolute w-full flex items-center pointer-events-none" style={{ top: `${topPct}%` }}><div className="w-12 text-xs text-gray-400 text-right pr-2 -mt-2">{hour}:00</div><div className="flex-1 h-px bg-gray-100"></div></div>);
                                 })}
-
-                                {/* Class Blocks */}
                                 <div className="absolute top-0 left-12 right-0 bottom-0 flex">
                                     {rooms.map(room => {
                                         const roomClasses = dayClasses.filter(c => c.roomId === room);
@@ -276,26 +205,11 @@
                                                 {roomClasses.map(cls => {
                                                     const startOffset = cls.startMin - (START_HOUR * 60);
                                                     if (startOffset < 0) return null;
-
                                                     const topPct = (startOffset / totalMinutes) * 100;
                                                     const heightPct = ((cls.duration * 60) / totalMinutes) * 100;
                                                     const style = getClassStyle(cls);
-                                                    
                                                     return (
-                                                        <div
-                                                            key={cls.id}
-                                                            className={`absolute w-full px-1 rounded shadow-sm overflow-hidden text-[10px] hover:z-20 hover:scale-105 transition-transform cursor-pointer border-l-2 flex flex-col justify-center group ${readOnly ? 'opacity-90' : ''}`}
-                                                            style={{ 
-                                                                top: `${topPct}%`, 
-                                                                height: `${heightPct}%`,
-                                                                maxHeight: `${heightPct}%`,
-                                                                backgroundColor: style.backgroundColor, 
-                                                                borderLeftColor: style.borderColor,
-                                                                color: style.color
-                                                            }}
-                                                            title={`${cls.level} by ${cls.instructor} (${cls.startTime}-${cls.endTime})`}
-                                                            onClick={() => !readOnly && onAssignRoom(cls.id, null)}
-                                                        >
+                                                        <div key={cls.id} className={`absolute w-full px-1 rounded shadow-sm overflow-hidden text-[10px] hover:z-20 hover:scale-105 transition-transform cursor-pointer border-l-2 flex flex-col justify-center group ${readOnly ? 'opacity-90' : ''}`} style={{ top: `${topPct}%`, height: `${heightPct}%`, maxHeight: `${heightPct}%`, backgroundColor: style.backgroundColor, borderLeftColor: style.borderColor, color: style.color }} title={`${cls.level} by ${cls.instructor}`} onClick={() => !readOnly && onAssignRoom(cls.id, null)}>
                                                             <div className="font-bold truncate">{cls.level}</div>
                                                             <div className="truncate opacity-75">{cls.instructor}</div>
                                                             <div className="truncate text-[9px] hidden sm:block">{cls.startTime}-{cls.endTime}</div>
@@ -319,7 +233,7 @@
             if (isEditing && !readOnly) {
               return (
                 <div className="p-3 rounded-lg border-2 border-indigo-500 bg-white shadow-lg text-sm space-y-2">
-                  <div className="flex justify-between items-center mb-1"><span className="text-xs font-bold text-indigo-600">Editing Mode</span><div className="flex gap-1"><button onClick={onEditSave} className="p-1 bg-green-100 text-green-700 rounded hover:bg-green-200"><Icon path={ICONS.check} size={14}/></button><button onClick={onEditCancel} className="p-1 bg-red-100 text-red-700 rounded hover:bg-red-200"><Icon path={ICONS.x} size={14}/></button></div></div>
+                  <div className="flex justify-between items-center mb-1"><span className="text-xs font-bold text-indigo-600">Editing</span><div className="flex gap-1"><button onClick={onEditSave} className="p-1 bg-green-100 text-green-700 rounded hover:bg-green-200"><Icon path={ICONS.check} size={14}/></button><button onClick={onEditCancel} className="p-1 bg-red-100 text-red-700 rounded hover:bg-red-200"><Icon path={ICONS.x} size={14}/></button></div></div>
                   <div><label className="block text-[10px] font-bold text-gray-500">Level</label><input className="w-full p-1 border rounded text-xs" value={editForm.level || ''} onChange={e => onEditChange('level', e.target.value)} /></div>
                   <div className="grid grid-cols-2 gap-2"><div><label className="block text-[10px] font-bold text-gray-500">Instructor</label><input className="w-full p-1 border rounded text-xs" value={editForm.instructor || ''} onChange={e => onEditChange('instructor', e.target.value)} /></div><div><label className="block text-[10px] font-bold text-gray-500">Students</label><input className="w-full p-1 border rounded text-xs" type="number" value={editForm.count || 0} onChange={e => onEditChange('count', e.target.value)} /></div></div>
                   <div className="grid grid-cols-3 gap-1"><div><label className="block text-[10px] font-bold text-gray-500">Day</label><select className="w-full p-1 border rounded text-xs" value={editForm.day} onChange={e => onEditChange('day', e.target.value)}>{DAYS.map(d => <option key={d} value={d}>{d}</option>)}</select></div><div className="col-span-2 grid grid-cols-2 gap-1"><input type="time" className="w-full p-1 border rounded text-xs" value={editForm.startTime} onChange={e => onEditChange('startTime', e.target.value)} /><input type="time" className="w-full p-1 border rounded text-xs" value={editForm.endTime} onChange={e => onEditChange('endTime', e.target.value)} /></div></div>
@@ -330,8 +244,8 @@
               <div className={`p-3 rounded-lg border-l-4 shadow-sm text-sm transition-all hover:shadow-md relative group bg-white ${readOnly ? 'opacity-80' : ''}`} style={{ backgroundColor: style.backgroundColor, borderLeftColor: style.borderColor, color: style.color }}>
                 {!readOnly && (
                     <>
-                        <button onClick={(e) => { e.stopPropagation(); onEditStart(cls); }} className="absolute top-2 right-8 p-1 rounded bg-white/50 hover:bg-white text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm" title="Edit Class"><Icon path={ICONS.edit2} size={12} /></button>
-                        <button onClick={(e) => { e.stopPropagation(); onDeleteClass(cls.id); }} className="absolute top-2 right-2 p-1 rounded bg-white/50 hover:bg-red-50 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm" title="Delete Class"><Icon path={ICONS.trash2} size={12} /></button>
+                        <button onClick={(e) => { e.stopPropagation(); onEditStart(cls); }} className="absolute top-2 right-8 p-1 rounded bg-white/50 hover:bg-white text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm" title="Edit"><Icon path={ICONS.edit2} size={12} /></button>
+                        <button onClick={(e) => { e.stopPropagation(); onDeleteClass(cls.id); }} className="absolute top-2 right-2 p-1 rounded bg-white/50 hover:bg-red-50 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm" title="Delete"><Icon path={ICONS.trash2} size={12} /></button>
                     </>
                 )}
                 <div className="flex justify-between items-start mb-1 pr-10"><div className="flex items-center gap-2 flex-wrap"><span className="font-bold">{cls.level}</span><span className="px-1.5 py-0.5 rounded text-xs font-bold bg-white/60 border border-black/10 shadow-sm">{cls.day}</span></div><span className="text-xs bg-white/60 px-1 rounded border border-black/10">{cls.studentType}</span></div>
@@ -344,34 +258,19 @@
 
         // --- Main App Component ---
         const App = () => {
-          // State: View & Source
-          const [viewMode, setViewMode] = useState('dashboard'); // 'dashboard' | 'weekly'
-          const [viewSource, setViewSource] = useState('personal'); // 'personal' | 'distributed'
+          const [viewMode, setViewMode] = useState('dashboard'); 
+          const [viewSource, setViewSource] = useState('personal'); 
           const [licenseAgreed, setLicenseAgreed] = useState(() => localStorage.getItem(STORAGE_KEYS.LICENSE_AGREED) === 'true');
+          const formatTime = (ts) => ts ? new Date(parseInt(ts)).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '없음';
+          const loadLocalData = (key, defaultVal) => { const saved = localStorage.getItem(key); return saved ? JSON.parse(saved) : defaultVal; };
 
-          const formatTime = (ts) => {
-              if (!ts) return '없음';
-              return new Date(parseInt(ts)).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-          };
-
-          const loadLocalData = (key, defaultVal) => {
-              const saved = localStorage.getItem(key);
-              return saved ? JSON.parse(saved) : defaultVal;
-          };
-
-          // Initialize with Local Data by default
-          const [rawInput, setRawInput] = useState(() => {
-              const saved = localStorage.getItem(STORAGE_KEYS.RAW_INPUT);
-              return saved || "CDI_내신(동아윤1)_월5(M) (17:00~19:00) [6명] Nahyun Kang\nC2D_Albatross_월7(M) (19:00~22:00) [3명] Olivia Constable\nCDI_Birdie_화5(E) (16:00~18:30) [8명] John Doe\nTO_Originator_화7(M)_1 (19:00~22:00) [4명] Jane Smith";
-          });
+          // States
+          const [rawInput, setRawInput] = useState(() => { const saved = localStorage.getItem(STORAGE_KEYS.RAW_INPUT); return saved || "CDI_내신(동아윤1)_월5(M) (17:00~19:00) [6명] Nahyun Kang\nC2D_Albatross_월7(M) (19:00~22:00) [3명] Olivia Constable\nCDI_Birdie_화5(E) (16:00~18:30) [8명] John Doe\nTO_Originator_화7(M)_1 (19:00~22:00) [4명] Jane Smith"; });
           const [classes, setClasses] = useState(() => loadLocalData(STORAGE_KEYS.CLASSES, []));
           const [rooms, setRooms] = useState(() => loadLocalData(STORAGE_KEYS.ROOMS, ['401', '402', '403', '404', '405', '406', '407', '601', '602', '603', '605', '606', '607']));
           const [instructorPrefs, setInstructorPrefs] = useState(() => loadLocalData(STORAGE_KEYS.PREFS, {}));
-          
-          const localVersion = useMemo(() => localStorage.getItem(STORAGE_KEYS.VERSION), [classes]); 
           const distVersion = PRELOADED_DATA ? PRELOADED_DATA.version : null;
 
-          // UI State
           const [newRoomName, setNewRoomName] = useState('');
           const [activeDay, setActiveDay] = useState('월');
           const [parseError, setParseError] = useState(null);
@@ -382,36 +281,33 @@
           const [showPrefModal, setShowPrefModal] = useState(false);
           const [showClearModal, setShowClearModal] = useState(false);
           const [showImportExportModal, setShowImportExportModal] = useState(false);
-          const [showAddClassModal, setShowAddClassModal] = useState(false); // New Class Modal
+          const [showAddClassModal, setShowAddClassModal] = useState(false); 
           const [spreadsheetInput, setSpreadsheetInput] = useState('');
           const [toast, setToast] = useState({ show: false, message: '' });
 
-          // Effects
+          // Effects & Logic (Same as before)
           useEffect(() => {
               if (viewSource === 'personal') {
                   setRawInput(localStorage.getItem(STORAGE_KEYS.RAW_INPUT) || "");
                   setClasses(loadLocalData(STORAGE_KEYS.CLASSES, []));
                   setRooms(loadLocalData(STORAGE_KEYS.ROOMS, ['401', '402', '403', '404', '405', '406', '407', '601', '602', '603', '605', '606', '607']));
                   setInstructorPrefs(loadLocalData(STORAGE_KEYS.PREFS, {}));
-                  showToast("📂 내 시간표(Personal) 모드로 전환되었습니다.");
+                  showToast("📂 Personal Mode Activated");
               } else {
                   if (PRELOADED_DATA) {
                       setRawInput(PRELOADED_DATA.rawInput || "");
                       setClasses(PRELOADED_DATA.classes || []);
                       setRooms(PRELOADED_DATA.rooms || []);
                       setInstructorPrefs(PRELOADED_DATA.instructorPrefs || {});
-                      showToast("🔒 배포된 원본(Distributed) 모드입니다. (읽기 전용)");
+                      showToast("🔒 Distributed (Read-Only) Mode");
                   } else {
-                      alert("배포된 원본 데이터가 없습니다.");
+                      alert("No distributed data found.");
                       setViewSource('personal');
                   }
               }
           }, [viewSource]);
 
-          useEffect(() => {
-              localStorage.setItem(STORAGE_KEYS.LICENSE_AGREED, licenseAgreed);
-          }, [licenseAgreed]);
-
+          useEffect(() => { localStorage.setItem(STORAGE_KEYS.LICENSE_AGREED, licenseAgreed); }, [licenseAgreed]);
           useEffect(() => {
               if (viewSource === 'personal') {
                   localStorage.setItem(STORAGE_KEYS.RAW_INPUT, rawInput);
@@ -421,159 +317,96 @@
                   localStorage.setItem(STORAGE_KEYS.VERSION, Date.now().toString());
               }
           }, [rawInput, classes, rooms, instructorPrefs, viewSource]);
-
           useEffect(() => {
-            const saveInterval = setInterval(() => { 
-                if (viewSource === 'personal') {
-                    showToast("📍 데이터가 브라우저 로컬 스토리지에 자동 저장되었습니다."); 
-                }
-            }, 60000);
+            const saveInterval = setInterval(() => { if (viewSource === 'personal') showToast("📍 Auto-saved to Local Storage"); }, 60000);
             return () => clearInterval(saveInterval);
           }, [viewSource]);
 
           const showToast = (msg) => { setToast({ show: true, message: msg }); setTimeout(() => setToast({ show: false, message: '' }), 3000); };
           const confirmReset = () => { localStorage.clear(); window.location.reload(); };
-
-          // Actions
-          const handleAddManualClass = (form) => {
-              const sParts = form.startTime.split(':').map(Number);
-              const eParts = form.endTime.split(':').map(Number);
-              const sMin = sParts[0] * 60 + sParts[1];
-              const eMin = eParts[0] * 60 + eParts[1];
-              const duration = (eMin - sMin) / 60;
-
-              const newClass = {
-                  id: `cls-man-${Date.now()}`,
-                  raw: "Manual Entry",
-                  type: form.type,
-                  level: form.level,
-                  day: form.day,
-                  period: "",
-                  studentType: form.studentType,
-                  startTime: form.startTime,
-                  endTime: form.endTime,
-                  startMin: sMin,
-                  endMin: eMin,
-                  count: form.count,
-                  instructor: form.instructor,
-                  duration: duration,
-                  roomId: form.roomId || null
-              };
-              setClasses(prev => [...prev, newClass]);
-              showToast("강의가 추가되었습니다.");
+          const resetToDistributed = () => {
+              if (!PRELOADED_DATA) return alert("No data to reset.");
+              if (confirm("⚠️ Warning: This will overwrite your personal data with the distributed version.")) {
+                  localStorage.setItem(STORAGE_KEYS.RAW_INPUT, PRELOADED_DATA.rawInput);
+                  localStorage.setItem(STORAGE_KEYS.CLASSES, JSON.stringify(PRELOADED_DATA.classes));
+                  localStorage.setItem(STORAGE_KEYS.ROOMS, JSON.stringify(PRELOADED_DATA.rooms));
+                  localStorage.setItem(STORAGE_KEYS.PREFS, JSON.stringify(PRELOADED_DATA.instructorPrefs));
+                  localStorage.setItem(STORAGE_KEYS.VERSION, Date.now().toString());
+                  window.location.reload();
+              }
           };
 
-          const parseData = () => {
-            if (viewSource !== 'personal') return alert("읽기 전용 모드입니다.");
+          const handleAddManualClass = (form) => {
+              const sParts = form.startTime.split(':').map(Number); const eParts = form.endTime.split(':').map(Number);
+              const sMin = sParts[0] * 60 + sParts[1]; const eMin = eParts[0] * 60 + eParts[1];
+              const newClass = { id: `cls-man-${Date.now()}`, raw: "Manual", type: form.type, level: form.level, day: form.day, period: "", studentType: form.studentType, startTime: form.startTime, endTime: form.endTime, startMin: sMin, endMin: eMin, count: form.count, instructor: form.instructor, duration: (eMin - sMin) / 60, roomId: form.roomId || null };
+              setClasses(prev => [...prev, newClass]);
+          };
+
+          const parseData = () => { /* (Same parsing logic) */
+            if (viewSource !== 'personal') return alert("Read-only mode.");
             const lines = rawInput.split('\n').filter(line => line.trim() !== '');
-            const newClasses = [];
-            const failures = [];
+            const newClasses = []; const failures = [];
             lines.forEach((line, index) => {
               try {
-                const timeRegex = /\((\d{1,2}:\d{2})~(\d{1,2}:\d{2})\)/;
-                const timeMatch = line.match(timeRegex);
+                const timeRegex = /\((\d{1,2}:\d{2})~(\d{1,2}:\d{2})\)/; const timeMatch = line.match(timeRegex);
                 if (!timeMatch) throw new Error("Time block not found");
                 const [_, startTime, endTime] = timeMatch;
-                const timeIndex = timeMatch.index;
-                const preTime = line.substring(0, timeIndex).trim(); 
-                const postTime = line.substring(timeIndex + timeMatch[0].length).trim(); 
+                const preTime = line.substring(0, timeMatch.index).trim(); 
+                const postTime = line.substring(timeMatch.index + timeMatch[0].length).trim(); 
                 const countMatch = postTime.match(/\[(\d+)명\]/);
                 const count = countMatch ? countMatch[1] : "0";
                 const instructor = postTime.replace(/\[\d+명\]/, '').trim();
                 const parts = preTime.split('_');
-                let type = parts[0] || "Unknown";
-                let level = "General";
-                let day = "";
-                let period = "";
-                let studentType = "";
-                const dayCharRegex = /[월화수목금토일]/;
-                let dayPartIndex = -1;
+                let type = parts[0] || "Unknown"; let level = "General"; let day = ""; let period = ""; let studentType = "";
+                const dayCharRegex = /[월화수목금토일]/; let dayPartIndex = -1;
                 for (let i = parts.length - 1; i >= 0; i--) { if (dayCharRegex.test(parts[i])) { dayPartIndex = i; break; } }
                 if (dayPartIndex === -1) throw new Error("Day not found");
                 if (dayPartIndex > 0) { if (dayPartIndex > 1) { level = parts.slice(1, dayPartIndex).join('_'); } else { level = parts[1] === parts[dayPartIndex] ? "" : parts[1]; } } else { type = "General"; }
                 const dayPartStr = parts[dayPartIndex]; 
                 const dayMatch = dayPartStr.match(/([월화수목금토일])(\d*)(\(([A-Za-z]+)\))?/);
                 if (dayMatch) { day = dayMatch[1]; period = dayMatch[2]; studentType = dayMatch[4] || ""; }
-                const sParts = startTime.split(':').map(Number);
-                const eParts = endTime.split(':').map(Number);
-                const sMin = sParts[0] * 60 + sParts[1];
-                const eMin = eParts[0] * 60 + eParts[1];
-                const duration = (eMin - sMin) / 60;
-                newClasses.push({ id: `cls-${Date.now()}-${index}`, raw: line, type, level: level || type, day, period, studentType, startTime, endTime, startMin: sMin, endMin: eMin, count, instructor, duration, roomId: null });
+                const sParts = startTime.split(':').map(Number); const eParts = endTime.split(':').map(Number);
+                const sMin = sParts[0] * 60 + sParts[1]; const eMin = eParts[0] * 60 + eParts[1];
+                newClasses.push({ id: `cls-${Date.now()}-${index}`, raw: line, type, level: level || type, day, period, studentType, startTime, endTime, startMin: sMin, endMin: eMin, count, instructor, duration: (eMin - sMin) / 60, roomId: null });
               } catch (err) { failures.push(line); }
             });
-            setClasses(newClasses);
-            setFailedLines(failures);
-            setParseError(failures.length > 0 ? `${failures.length} lines could not be parsed.` : null);
+            setClasses(newClasses); setFailedLines(failures); setParseError(failures.length > 0 ? `${failures.length} lines failed.` : null);
           };
-
-          const autoAssignClasses = () => {
-            if (viewSource !== 'personal') return alert("읽기 전용 모드입니다.");
+          const autoAssignClasses = () => { /* (Same Logic) */
+            if (viewSource !== 'personal') return alert("Read-only mode.");
             let assignedCount = 0; let conflictCount = 0; let noPrefCount = 0; let currentClasses = [...classes];
             const unassigned = currentClasses.filter(c => !c.roomId);
             unassigned.forEach(cls => {
               const prefRoom = instructorPrefs[cls.instructor];
-              if (!prefRoom) { noPrefCount++; return; }
-              if (!rooms.includes(prefRoom)) { noPrefCount++; return; }
-              const hasConflict = currentClasses.some(existing => {
-                if (existing.roomId !== prefRoom) return false;
-                if (existing.day !== cls.day) return false;
-                if (existing.id === cls.id) return false;
-                return (cls.startMin < existing.endMin && cls.endMin > existing.startMin);
-              });
-              if (!hasConflict) {
-                const index = currentClasses.findIndex(c => c.id === cls.id);
-                if (index !== -1) { currentClasses[index] = { ...currentClasses[index], roomId: prefRoom }; assignedCount++; }
-              } else { conflictCount++; }
+              if (!prefRoom || !rooms.includes(prefRoom)) { noPrefCount++; return; }
+              const hasConflict = currentClasses.some(existing => existing.roomId === prefRoom && existing.day === cls.day && existing.id !== cls.id && cls.startMin < existing.endMin && cls.endMin > existing.startMin);
+              if (!hasConflict) { const index = currentClasses.findIndex(c => c.id === cls.id); if (index !== -1) { currentClasses[index] = { ...currentClasses[index], roomId: prefRoom }; assignedCount++; } } else { conflictCount++; }
             });
-            showToast(`✨ 자동 배정: ${assignedCount}건 완료`);
-            setClasses(currentClasses);
+            showToast(`✨ Assigned: ${assignedCount}, Skipped: ${conflictCount}`); setClasses(currentClasses);
           };
-
           const startEditing = useCallback((cls) => { if (viewSource !== 'personal') return; setEditingClassId(cls.id); setEditForm({ ...cls }); }, [viewSource]);
           const cancelEditing = useCallback(() => { setEditingClassId(null); setEditForm({}); }, []);
-          const saveEditing = useCallback(() => {
-            setClasses(prev => prev.map(c => {
-              if (c.id === editingClassId) {
-                const startParts = editForm.startTime.split(':').map(Number); const endParts = editForm.endTime.split(':').map(Number);
-                const sMin = startParts[0] * 60 + startParts[1]; const eMin = endParts[0] * 60 + eParts[1]; const duration = (eMin - sMin) / 60;
-                return { ...editForm, startMin: sMin, endMin: eMin, duration };
-              }
-              return c;
-            }));
-            setEditingClassId(null); setEditForm({});
-          }, [editingClassId, editForm]);
+          const saveEditing = useCallback(() => { setClasses(prev => prev.map(c => { if (c.id === editingClassId) { const sParts = editForm.startTime.split(':').map(Number); const eParts = editForm.endTime.split(':').map(Number); const sMin = sParts[0] * 60 + sParts[1]; const eMin = eParts[0] * 60 + eParts[1]; return { ...editForm, startMin: sMin, endMin: eMin, duration: (eMin - sMin) / 60 }; } return c; })); setEditingClassId(null); setEditForm({}); }, [editingClassId, editForm]);
           const handleEditChange = useCallback((field, value) => { setEditForm(prev => ({ ...prev, [field]: value })); }, []);
           const assignRoom = useCallback((classId, roomId) => { if (viewSource !== 'personal') return; setClasses(prev => prev.map(cls => cls.id === classId ? { ...cls, roomId } : cls)); }, [viewSource]);
-          const deleteClass = useCallback((classId) => { if (viewSource !== 'personal') return; if(confirm("삭제하시겠습니까?")) { setClasses(prev => prev.filter(c => c.id !== classId)); } }, [viewSource]);
+          const deleteClass = useCallback((classId) => { if (viewSource !== 'personal') return; if(confirm("Delete class?")) { setClasses(prev => prev.filter(c => c.id !== classId)); } }, [viewSource]);
+          const generateColor = (str) => { if (!str) return '#FFFFFF'; let hash = 0; for (let i = 0; i < str.length; i++) { hash = str.charCodeAt(i) + ((hash << 5) - hash); } return PASTEL_PALETTE[Math.abs(hash % PASTEL_PALETTE.length)]; };
+          const getClassStyle = useCallback((cls) => { let bg = '#ffffff'; let color = '#000000'; if (colorScheme === 'instructor') { bg = generateColor(cls.instructor); } else if (colorScheme === 'level') { bg = generateColor(cls.level); } else { if (cls.type === 'CDI') { bg = '#eff6ff'; color = '#1e3a8a'; } else { bg = '#ecfdf5'; color = '#064e3b'; } } return { backgroundColor: bg, color: color }; }, [colorScheme]);
+          const addRoom = () => { if (viewSource !== 'personal') return; if (newRoomName.trim() && !rooms.includes(newRoomName.trim())) { setRooms([...rooms, newRoomName.trim()]); setNewRoomName(''); } };
+          const removeRoom = (roomName) => { if (viewSource !== 'personal') return; if(confirm(`Delete room '${roomName}'?`)) { setRooms(rooms.filter(r => r !== roomName)); setClasses(prev => prev.map(cls => cls.roomId === roomName ? { ...cls, roomId: null } : cls)); } };
 
-          const generateColor = (str) => { if (!str) return '#FFFFFF'; let hash = 0; for (let i = 0; i < str.length; i++) { hash = str.charCodeAt(i) + ((hash << 5) - hash); } const index = Math.abs(hash % PASTEL_PALETTE.length); return PASTEL_PALETTE[index]; };
-          const getClassStyle = useCallback((cls) => {
-            let bg = '#ffffff'; let color = '#000000';
-            if (colorScheme === 'instructor') { bg = generateColor(cls.instructor); } else if (colorScheme === 'level') { bg = generateColor(cls.level); } else { if (cls.type === 'CDI') { bg = '#eff6ff'; color = '#1e3a8a'; } else { bg = '#ecfdf5'; color = '#064e3b'; } }
-            return { backgroundColor: bg, color: color };
-          }, [colorScheme]);
-
-          // Copy/Import Functions
+          // Copy Functions
           const copyToClipboardWithStyle = (targetDay) => {
               const timeSlots = [];
               for(let h = START_HOUR; h < END_HOUR; h++) { timeSlots.push({ label: `${h.toString().padStart(2,'0')}:00`, min: h * 60 }); timeSlots.push({ label: `${h.toString().padStart(2,'0')}:30`, min: h * 60 + 30 }); }
-              
               let fullHtml = "";
-              // Determine which days to export
               const daysToExport = targetDay === 'ALL' ? DAYS : [targetDay];
-
               daysToExport.forEach(d => {
-                  // Day Header for multi-day export
-                  if (targetDay === 'ALL') {
-                      fullHtml += `<h2 style="font-family: sans-serif; color: #333;">${DAY_MAP[d]} Schedule</h2>`;
-                  }
-
-                  let html = `<table border="1" style="border-collapse: collapse; text-align: center; font-family: sans-serif; font-size: 12px; margin-bottom: 20px;">`;
-                  html += `<thead><tr><th style="background-color: #e5e7eb; width: 80px; height: 30px;">시간 / 강의실</th>`;
+                  if (targetDay === 'ALL') fullHtml += `<h2 style="font-family: sans-serif; color: #333;">${DAY_MAP[d]} Schedule</h2>`;
+                  let html = `<table border="1" style="border-collapse: collapse; text-align: center; font-family: sans-serif; font-size: 12px; margin-bottom: 20px;"><thead><tr><th style="background-color: #e5e7eb; width: 80px; height: 30px;">Time / Room</th>`;
                   rooms.forEach(r => { html += `<th style="background-color: #e5e7eb; width: 120px;">${r}</th>`; });
                   html += `</tr></thead><tbody>`;
-                  
                   const skipMap = {}; 
                   timeSlots.forEach((slot, tIdx) => {
                       html += `<tr><td style="background-color: #f3f4f6; font-weight: bold; height: 30px;">${slot.label}</td>`;
@@ -583,7 +416,7 @@
                           const cls = classes.find(c => c.day === d && c.roomId === room && Math.abs(c.startMin - slot.min) < 1);
                           if (cls) {
                               const rowSpan = Math.ceil(cls.duration * 2); const style = getClassStyle(cls);
-                              html += `<td rowspan="${rowSpan}" style="background-color: ${style.backgroundColor}; color: ${style.color}; border: 1px solid #d1d5db; padding: 4px; vertical-align: middle;"><div style="font-weight: bold; font-size: 13px;">${cls.level}</div><div style="font-size: 11px;">${cls.instructor}</div><div style="font-size: 10px; opacity: 0.8;">${cls.studentType} (${cls.count}명)</div></td>`;
+                              html += `<td rowspan="${rowSpan}" style="background-color: ${style.backgroundColor}; color: ${style.color}; border: 1px solid #d1d5db; padding: 4px; vertical-align: middle;"><div style="font-weight: bold; font-size: 13px;">${cls.level}</div><div style="font-size: 11px;">${cls.instructor}</div><div style="font-size: 10px; opacity: 0.8;">${cls.studentType} (${cls.count})</div></td>`;
                               for(let i = 1; i < rowSpan; i++) { skipMap[`${rIdx}-${tIdx + i}`] = true; }
                           } else { html += `<td style="border: 1px solid #e5e7eb;"></td>`; }
                       });
@@ -592,186 +425,73 @@
                   html += `</tbody></table>`;
                   fullHtml += html;
               });
-
               const blobHtml = new Blob([fullHtml], { type: 'text/html' }); const blobText = new Blob(["HTML Format"], { type: 'text/plain' });
-              const data = [new ClipboardItem({ "text/html": blobHtml, "text/plain": blobText })];
-              navigator.clipboard.write(data).then(() => { 
-                  const msg = targetDay === 'ALL' ? "주간 전체 시간표가 복사되었습니다!" : `${DAY_MAP[targetDay]} 시간표가 복사되었습니다!`;
-                  showToast(`📋 ${msg}`); 
-              });
+              navigator.clipboard.write([new ClipboardItem({ "text/html": blobHtml, "text/plain": blobText })]).then(() => showToast(`📋 Copied Excel format`));
           };
-
-          const exportAsRawString = () => {
-              const lines = classes.map(cls => {
-                  return `${cls.type}_${cls.level}_${cls.day}${cls.period || ''}(${cls.studentType}) (${cls.startTime}~${cls.endTime}) [${cls.count}명] ${cls.instructor}`;
-              });
-              const rawText = lines.join('\n');
-              navigator.clipboard.writeText(rawText).then(() => {
-                  showToast("📝 원본 문자열 형식으로 복사되었습니다!");
-              });
-          };
-
-          const copyDataForEmbedding = () => {
-              const data = {
-                  version: Date.now(),
-                  rawInput,
-                  classes,
-                  rooms,
-                  instructorPrefs
-              };
-              const jsonString = JSON.stringify(data);
-              navigator.clipboard.writeText(jsonString).then(() => {
-                  showToast("📦 배포용 데이터(Timestamped)가 복사되었습니다!");
-              });
-          };
-
-          const addRoom = () => { if (viewSource !== 'personal') return; if (newRoomName.trim() && !rooms.includes(newRoomName.trim())) { setRooms([...rooms, newRoomName.trim()]); setNewRoomName(''); } };
-          const removeRoom = (roomName) => { if (viewSource !== 'personal') return; if(confirm(`'${roomName}' 삭제?`)) { setRooms(rooms.filter(r => r !== roomName)); setClasses(prev => prev.map(cls => cls.roomId === roomName ? { ...cls, roomId: null } : cls)); } };
+          const exportAsRawString = () => { const lines = classes.map(cls => `${cls.type}_${cls.level}_${cls.day}${cls.period || ''}(${cls.studentType}) (${cls.startTime}~${cls.endTime}) [${cls.count}명] ${cls.instructor}`); navigator.clipboard.writeText(lines.join('\n')).then(() => showToast("📝 Raw string copied!")); };
+          const copyDataForEmbedding = () => { const data = { version: Date.now(), rawInput, classes, rooms, instructorPrefs }; navigator.clipboard.writeText(JSON.stringify(data)).then(() => showToast("📦 Embedding Code Copied!")); };
 
           const unassignedClasses = classes.filter(c => !c.roomId);
           const instructorStats = useMemo(() => {
-            const stats = {};
-            classes.forEach(cls => {
-              const name = cls.instructor.trim();
-              if (!stats[name]) { stats[name] = { count: 0, hours: 0, classes: [] }; }
-              stats[name].count += 1; stats[name].hours += cls.duration; stats[name].classes.push(cls);
-            });
+            const stats = {}; classes.forEach(cls => { const name = cls.instructor.trim(); if (!stats[name]) { stats[name] = { count: 0, hours: 0 }; } stats[name].count += 1; stats[name].hours += cls.duration; });
             return Object.entries(stats).sort((a, b) => b[1].hours - a[1].hours);
           }, [classes]);
-          
           const allInstructors = useMemo(() => { const names = new Set(classes.map(c => c.instructor)); return Array.from(names).sort(); }, [classes]);
 
           return (
             <div className="min-h-screen bg-gray-100 text-gray-800 font-sans relative">
               {!licenseAgreed && <LicenseModal onAgree={() => setLicenseAgreed(true)} />}
               {showAddClassModal && <AddClassModal onClose={() => setShowAddClassModal(false)} onAdd={handleAddManualClass} rooms={rooms} />}
-              
-              <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-[100] transition-all duration-300 ${toast.show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-                  <div className="bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium flex items-center gap-2"><span>💾</span> {toast.message}</div>
-              </div>
-              
-              {showClearModal && (
-                  <div className="fixed inset-0 z-[999] flex items-center justify-center modal-backdrop">
-                      <div className="absolute inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm"></div>
-                      <div className="bg-white p-6 rounded-xl shadow-2xl z-10 max-w-md w-full mx-4 border border-gray-200 relative">
-                          <h2 className="text-xl font-bold text-red-600 mb-2 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={24} /> 경고: 데이터 초기화</h2>
-                          <p className="text-gray-600 mb-6">모든 데이터가 삭제됩니다.</p>
-                          <div className="flex justify-end gap-3"><button onClick={() => setShowClearModal(false)} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors">취소</button><button onClick={confirmReset} className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors shadow-md">초기화</button></div>
-                      </div>
-                  </div>
-              )}
-              
+              <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-[100] transition-all duration-300 ${toast.show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}><div className="bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium flex items-center gap-2"><span>💾</span> {toast.message}</div></div>
+              {showClearModal && (<div className="fixed inset-0 z-[999] flex items-center justify-center modal-backdrop"><div className="absolute inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm"></div><div className="bg-white p-6 rounded-xl shadow-2xl z-10 max-w-md w-full mx-4 border border-gray-200 relative"><h2 className="text-xl font-bold text-red-600 mb-2 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={24} /> Warning: Clear All Data</h2><p className="text-gray-600 mb-6">All data will be lost.</p><div className="flex justify-end gap-3"><button onClick={() => setShowClearModal(false)} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors">Cancel</button><button onClick={confirmReset} className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors shadow-md">Clear</button></div></div></div>)}
               {showImportExportModal && (
-                  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setShowImportExportModal(false)}></div>
-                      <div className="bg-white w-full max-w-2xl rounded-xl shadow-2xl z-10 flex flex-col max-h-[85vh]">
-                          <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-indigo-50 rounded-t-xl">
-                              <h2 className="font-bold text-lg text-indigo-800 flex items-center gap-2"><Icon path={ICONS.table} size={20} /> 데이터 내보내기 / 관리</h2>
-                              <button onClick={() => setShowImportExportModal(false)} className="p-1 hover:bg-indigo-100 rounded-full text-indigo-400"><Icon path={ICONS.x} size={20} /></button>
-                          </div>
-                          <div className="p-6 overflow-y-auto">
-                              <div className="mb-6">
-                                  <h3 className="text-sm font-bold text-gray-700 mb-2">1. 스마트 엑셀 내보내기 (추천)</h3>
-                                  <p className="text-xs text-gray-500 mb-3">{DAY_MAP[activeDay]} 시간표를 서식(색상, 병합) 포함하여 복사합니다.</p>
-                                  <button onClick={() => copyToClipboardWithStyle(activeDay)} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium shadow-sm transition-colors"><Icon path={ICONS.download} size={16} /> 엑셀용 복사하기</button>
-                              </div>
-                              <hr className="my-6 border-gray-100" />
-                              <div className="mb-6">
-                                  <h3 className="text-sm font-bold text-gray-700 mb-2">2. 문자열로 내보내기 (백업용)</h3>
-                                  <p className="text-xs text-gray-500 mb-3">현재 시간표 데이터를 파싱 가능한 원본 문자열 형태로 복사합니다.</p>
-                                  <button onClick={exportAsRawString} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg text-sm font-medium shadow-sm transition-colors"><Icon path={ICONS.fileText} size={16} /> 원본 문자열 복사하기</button>
-                              </div>
-                              <hr className="my-6 border-gray-100" />
-                              <div className="mb-2 bg-red-50 border border-red-200 rounded-lg p-4 relative overflow-hidden">
-                                  <div className="absolute top-0 left-0 w-1 h-full bg-red-400"></div>
-                                  <h3 className="text-sm font-bold text-red-800 mb-2 flex items-center gap-2">
-                                      <Icon path={ICONS.alertCircle} size={16} /> Danger Zone: 배포용 데이터 내보내기
-                                  </h3>
-                                  <p className="text-xs text-red-600 mb-3 leading-relaxed"><strong>고급 사용자 전용 기능입니다.</strong><br/>현재 상태를 타임스탬프와 함께 코드로 변환합니다. HTML 파일을 직접 수정하여 배포할 때만 사용하세요.</p>
-                                  <button onClick={copyDataForEmbedding} className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 border border-red-300 rounded-lg text-sm font-medium shadow-sm transition-colors"><Icon path={ICONS.code} size={16} /> 배포용 코드 복사</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4"><div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setShowImportExportModal(false)}></div><div className="bg-white w-full max-w-2xl rounded-xl shadow-2xl z-10 flex flex-col max-h-[85vh]"><div className="p-4 border-b border-gray-100 flex justify-between items-center bg-indigo-50 rounded-t-xl"><h2 className="font-bold text-lg text-indigo-800 flex items-center gap-2"><Icon path={ICONS.table} size={20} /> Data Export</h2><button onClick={() => setShowImportExportModal(false)} className="p-1 hover:bg-indigo-100 rounded-full text-indigo-400"><Icon path={ICONS.x} size={20} /></button></div>
+                      <div className="p-6 overflow-y-auto">
+                          <div className="mb-6"><h3 className="text-sm font-bold text-gray-700 mb-2">1. Raw String Export (Backup)</h3><p className="text-xs text-gray-500 mb-3">Export current data as parseable raw strings.</p><button onClick={exportAsRawString} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg text-sm font-medium shadow-sm transition-colors"><Icon path={ICONS.code} size={16} /> Copy Raw String</button></div>
+                          <hr className="my-6 border-gray-100" />
+                          <div className="mb-2 bg-red-50 border border-red-200 rounded-lg p-4 relative overflow-hidden"><div className="absolute top-0 left-0 w-1 h-full bg-red-400"></div><h3 className="text-sm font-bold text-red-800 mb-2 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={16} /> Danger Zone: Deployment Export</h3><p className="text-xs text-red-600 mb-3 leading-relaxed"><strong>Advanced Users Only.</strong><br/>Generate embeddable code for distribution.</p><button onClick={copyDataForEmbedding} className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 border border-red-300 rounded-lg text-sm font-medium shadow-sm transition-colors"><Icon path={ICONS.code} size={16} /> Copy Embedding Code</button></div>
+                      </div></div></div>
               )}
               {showPrefModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60] p-4">
-                  <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg flex flex-col max-h-[80vh]">
-                    <div className="p-4 border-b border-gray-200 flex justify-between items-center"><h2 className="font-bold text-lg flex items-center gap-2"><span className="text-indigo-600"><Icon path={ICONS.settings} size={20} /></span> Preferred Classrooms</h2><button onClick={() => setShowPrefModal(false)} className="p-1 hover:bg-gray-100 rounded-full"><Icon path={ICONS.x} size={20} className="text-gray-500" /></button></div>
-                    <div className="p-4 overflow-y-auto flex-1">
-                      {allInstructors.length === 0 ? <p className="text-center text-gray-400 py-8">정보 없음</p> : <div className="space-y-3">{allInstructors.map(name => (<div key={name} className="flex justify-between items-center text-sm border p-2 rounded bg-gray-50"><span className="font-medium text-gray-800">{name}</span><select className="border rounded p-1.5 w-40 text-sm bg-white" value={instructorPrefs[name] || ""} onChange={(e) => setInstructorPrefs(prev => ({ ...prev, [name]: e.target.value }))}><option value="">-- None --</option>{rooms.map(r => <option key={r} value={r}>{r}</option>)}</select></div>))}</div>}
-                    </div>
-                    <div className="p-4 border-t border-gray-200 bg-gray-50 rounded-b-xl flex justify-end gap-2"><button onClick={() => setShowPrefModal(false)} className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition-colors">Done</button></div>
-                  </div>
-                </div>
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60] p-4"><div className="bg-white rounded-xl shadow-2xl w-full max-w-lg flex flex-col max-h-[80vh]"><div className="p-4 border-b border-gray-200 flex justify-between items-center"><h2 className="font-bold text-lg flex items-center gap-2"><span className="text-indigo-600"><Icon path={ICONS.settings} size={20} /></span> Preferred Classrooms</h2><button onClick={() => setShowPrefModal(false)} className="p-1 hover:bg-gray-100 rounded-full"><Icon path={ICONS.x} size={20} className="text-gray-500" /></button></div><div className="p-4 overflow-y-auto flex-1">{allInstructors.length === 0 ? <p className="text-center text-gray-400 py-8">No info</p> : <div className="space-y-3">{allInstructors.map(name => (<div key={name} className="flex justify-between items-center text-sm border p-2 rounded bg-gray-50"><span className="font-medium text-gray-800">{name}</span><select className="border rounded p-1.5 w-40 text-sm bg-white" value={instructorPrefs[name] || ""} onChange={(e) => setInstructorPrefs(prev => ({ ...prev, [name]: e.target.value }))}><option value="">-- None --</option>{rooms.map(r => <option key={r} value={r}>{r}</option>)}</select></div>))}</div>}</div><div className="p-4 border-t border-gray-200 bg-gray-50 rounded-b-xl flex justify-end gap-2"><button onClick={() => setShowPrefModal(false)} className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition-colors">Done</button></div></div></div>
               )}
 
-              {/* --- Header --- */}
+              {/* HEADER - NEW LAYOUT */}
               <header className="bg-indigo-700 text-white p-4 shadow-md sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                  {/* Left Side: Logo & Navigation */}
+                  {/* Left: Logo & Nav Toggles */}
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto">
                     <div className="flex items-center gap-2 mr-4">
                         <Icon path={ICONS.bookOpen} size={24} />
                         <h1 className="text-xl font-bold whitespace-nowrap">School Timetable Manager</h1>
                     </div>
-                    
                     <div className="flex flex-wrap gap-2">
-                        {/* VIEW SOURCE TABS (Moved to Left) */}
                         <div className="flex bg-indigo-900/50 rounded-lg p-1">
-                            <button 
-                                onClick={() => setViewSource('personal')} 
-                                className={`px-3 py-1 rounded-md text-xs font-medium transition-all flex flex-col items-center leading-tight ${viewSource === 'personal' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}
-                            >
-                                <span>내 시간표</span>
-                                <span className="text-[9px] opacity-70 hidden sm:inline">{formatTime(localStorage.getItem(STORAGE_KEYS.VERSION))}</span>
-                            </button>
-                            <button 
-                                onClick={() => setViewSource('distributed')} 
-                                className={`px-3 py-1 rounded-md text-xs font-medium transition-all flex flex-col items-center leading-tight ${viewSource === 'distributed' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}
-                            >
-                                <span>배포된 원본</span>
-                                <span className="text-[9px] opacity-70 hidden sm:inline">{formatTime(distVersion)}</span>
-                            </button>
+                            <button onClick={() => setViewSource('personal')} className={`px-3 py-1 rounded-md text-xs font-medium transition-all flex flex-col items-center leading-tight ${viewSource === 'personal' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}><span>Personal</span><span className="text-[9px] opacity-70 hidden sm:inline">{formatTime(localStorage.getItem(STORAGE_KEYS.VERSION))}</span></button>
+                            <button onClick={() => setViewSource('distributed')} className={`px-3 py-1 rounded-md text-xs font-medium transition-all flex flex-col items-center leading-tight ${viewSource === 'distributed' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}><span>Distributed</span><span className="text-[9px] opacity-70 hidden sm:inline">{formatTime(distVersion)}</span></button>
                         </div>
-
-                        {/* VIEW MODE TABS (Moved to Left) */}
                         <div className="flex bg-indigo-900/50 rounded-lg p-1">
-                            <button onClick={() => setViewMode('dashboard')} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'dashboard' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}>대시보드</button>
-                            <button onClick={() => setViewMode('weekly')} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'weekly' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}>주간 전체</button>
+                            <button onClick={() => setViewMode('dashboard')} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'dashboard' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}>Dashboard</button>
+                            <button onClick={() => setViewMode('weekly')} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'weekly' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}>Weekly</button>
                         </div>
                     </div>
                   </div>
                   
-                  {/* Right Side: Actions */}
+                  {/* Right: Actions */}
                   <div className="flex items-center gap-2 text-sm ml-auto">
                      <div className="flex items-center gap-2 bg-indigo-800 rounded-lg p-1 px-2 mr-2">
                         <Icon path={ICONS.palette} size={14} className="text-indigo-200" />
                         <select value={colorScheme} onChange={(e) => setColorScheme(e.target.value)} className="bg-indigo-900 text-white border-none rounded text-xs p-1 focus:ring-0 cursor-pointer outline-none"><option value="type">Type</option><option value="instructor">Teacher</option><option value="level">Level</option></select>
                      </div>
-
                      {/* 1. Data/File (Green) */}
                      <button onClick={() => setShowImportExportModal(true)} className="flex items-center gap-1 bg-green-600 border border-green-500 hover:bg-green-500 px-3 py-1.5 rounded-lg transition-colors shadow-sm"><Icon path={ICONS.table} size={14} /><span className="hidden sm:inline">Data/File</span></button>
-                     
                      {/* 2. Preferences (White/Purple) */}
-                     <button onClick={() => setShowPrefModal(true)} className="flex items-center gap-1 bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-50 px-3 py-1.5 rounded-lg transition-colors shadow-sm">
-                        <Icon path={ICONS.settings} size={14} />
-                        <span className="hidden sm:inline">Preferred Classrooms</span>
-                     </button>
-
+                     <button onClick={() => setShowPrefModal(true)} className="flex items-center gap-1 bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-50 px-3 py-1.5 rounded-lg transition-colors shadow-sm"><Icon path={ICONS.settings} size={14} /><span className="hidden sm:inline">Preferences</span></button>
                      {/* 3. Clear (Red) */}
-                     <button onClick={() => setShowClearModal(true)} className="flex items-center gap-1 bg-red-600 border border-red-500 hover:bg-red-500 px-3 py-1.5 rounded-lg transition-colors text-white shadow-sm" title="Clear All Data">
-                       <Icon path={ICONS.trash2} size={14} />
-                       <span className="hidden sm:inline">Clear</span>
-                     </button>
+                     <button onClick={() => setShowClearModal(true)} className="flex items-center gap-1 bg-red-600 border border-red-500 hover:bg-red-500 px-3 py-1.5 rounded-lg transition-colors text-white shadow-sm" title="Clear All Data"><Icon path={ICONS.trash2} size={14} /><span className="hidden sm:inline">Clear</span></button>
                   </div>
                 </div>
-                {/* Read Only Banner */}
-                {viewSource === 'distributed' && (
-                    <div className="bg-yellow-100 text-yellow-800 text-center text-xs py-1 font-bold mt-2 rounded">
-                        ⚠️ 현재 '배포된 원본' 모드입니다. 수정이 불가능합니다. 수정을 원하시면 '내 시간표' 탭을 선택하세요.
-                    </div>
-                )}
+                {viewSource === 'distributed' && (<div className="bg-yellow-100 text-yellow-800 text-center text-xs py-1 font-bold mt-2 rounded">⚠️ Read-Only Mode (Distributed Version)</div>)}
               </header>
 
               <main className="max-w-7xl mx-auto p-4">
@@ -788,7 +508,7 @@
                             <div className="flex justify-between items-center mb-3">
                                 <h2 className="font-bold text-gray-700 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={18} className="text-orange-500" /> Unassigned Lectures</h2>
                                 <div className="flex items-center gap-2">
-                                    <button onClick={() => setShowAddClassModal(true)} disabled={viewSource !== 'personal'} className={`p-1 rounded bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition-colors ${viewSource !== 'personal' && 'opacity-50 cursor-not-allowed'}`} title="Add New Lecture"><Icon path={ICONS.plus} size={14} /><span className="text-xs font-bold ml-1">New</span></button>
+                                    <button onClick={() => setShowAddClassModal(true)} disabled={viewSource !== 'personal'} className={`p-1 px-2 rounded bg-indigo-100 text-indigo-700 hover:bg-indigo-200 transition-colors flex items-center gap-1 ${viewSource !== 'personal' && 'opacity-50 cursor-not-allowed'}`} title="Add New Lecture"><Icon path={ICONS.plus} size={14} /><span className="text-xs font-bold">New</span></button>
                                     <span className="text-xs bg-gray-200 px-2 py-0.5 rounded-full">{unassignedClasses.length}</span>
                                 </div>
                             </div>
@@ -828,18 +548,10 @@
                         </div>
                     </div>
                 )}
-                
-                {/* Weekly View with Contextual Excel Export */}
                 {viewMode === 'weekly' && (
                     <div className="relative">
                         <div className="absolute top-0 right-0 z-20 p-2">
-                            <button 
-                                onClick={() => copyToClipboardWithStyle('ALL')}
-                                className="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium shadow-md transition-colors"
-                            >
-                                <Icon path={ICONS.download} size={16} />
-                                <span>주간 전체 엑셀 복사</span>
-                            </button>
+                            <button onClick={() => copyToClipboardWithStyle('ALL')} className="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium shadow-md transition-colors"><Icon path={ICONS.download} size={16} /><span>Copy Weekly Excel</span></button>
                         </div>
                         <div className="space-y-8 pt-12">
                             {DAYS.map(day => (<div key={day} className="w-full h-[600px]"><DayTimetable day={day} rooms={rooms} classes={classes} onAssignRoom={assignRoom} getClassStyle={getClassStyle} fullWidth={true} readOnly={viewSource !== 'personal'} onExportExcel={copyToClipboardWithStyle} /></div>))}
