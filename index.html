@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Timetable Manager (Dual View)</title>
+    <title>School Timetable Manager (Pro UI) v1.2</title>
     
-    <!-- 1. 시간표 모양 아이콘 (Favicon) 추가 -->
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234f46e5%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><rect x=%223%22 y=%224%22 width=%2218%22 height=%2218%22 rx=%222%22 ry=%222%22></rect><line x1=%2216%22 y1=%222%22 x2=%2216%22 y2=%226%22></line><line x1=%228%22 y1=%222%22 x2=%228%22 y2=%226%22></line><line x1=%223%22 y1=%2210%22 x2=%2221%22 y2=%2210%22></line><line x1=%229%22 y1=%2210%22 x2=%229%22 y2=%2222%22></line><line x1=%2215%22 y1=%2210%22 x2=%2215%22 y2=%2222%22></line></svg>" />
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,16 +27,8 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        /* =========================================================================
-           [배포 가이드]
-           1. 'Data / File' 메뉴 -> 'Danger Zone' -> '배포용 데이터 복사' 클릭
-           2. 복사된 데이터를 아래 'PRELOADED_DATA' 변수에 할당하세요.
-           (주의: 'const PRELOADED_DATA =' 부분은 한 번만 나와야 합니다!)
-           =========================================================================
-        */
-        
-        // --- [FIXED] 중복된 선언 제거 및 데이터 올바르게 할당 ---
-        const PRELOADED_DATA = {"rawInput":"CDI_내신(동아윤1)_월5(M) (17:00~19:00) [6명] Nahyun Kang\nC2D_Albatross_월7(M) (19:00~22:00) [3명] Olivia Constable\nCDI_Birdie_화5(E) (16:00~18:30) [8명] John Doe\nTO_Originator_화7(M)_1 (19:00~22:00) [4명] Jane Smith","classes":[{"id":"cls-1763705806078-0","raw":"TO_Hypothesist_화4(E) (16:00~17:30) [7명] Chanhee Yang","type":"TO","level":"Hypothesist","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"7","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-1","raw":"TO_Hypothesist_화4(E) (17:30~19:00) [7명] Chanhee Yang","type":"TO","level":"Hypothesist","day":"화","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"7","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-2","raw":"TO_Originator_화7(M)_1 (19:00~20:30) [13명] Chanhee Yang","type":"TO","level":"Originator","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"13","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-3","raw":"TO_Experimenter_화7(M) (20:30~22:00) [15명] Chanhee Yang","type":"TO","level":"Experimenter","day":"화","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"15","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-4","raw":"TO_Originator_목7(M) (19:00~20:30) [8명] Chanhee Yang","type":"TO","level":"Originator","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"8","instructor":"Jaerin An","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-5","raw":"TO_Hypothesist_금4(E) (16:00~17:30) [7명] Chanhee Yang","type":"TO","level":"Hypothesist","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"7","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-6","raw":"TO_Hypothesist_금4(E) (17:30~19:00) [7명] Chanhee Yang","type":"TO","level":"Hypothesist","day":"금","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"7","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-7","raw":"TO_Experimenter_월7(M) (19:00~20:30) [14명] gina kim","type":"TO","level":"Experimenter","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"14","instructor":"gina kim","duration":1.5,"roomId":"606"},{"id":"cls-1763705806079-9","raw":"TO_Experimenter_화7(M) (19:00~20:30) [15명] gina kim","type":"TO","level":"Experimenter","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"15","instructor":"gina kim","duration":1.5,"roomId":"602"},{"id":"cls-1763705806079-10","raw":"TO_Originator_화7(M)_1 (20:30~22:00) [13명] gina kim","type":"TO","level":"Originator","day":"화","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"13","instructor":"gina kim","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-11","raw":"TO_Hypothesist_월4(E) (17:30~19:00) [2명] Jaerin An","type":"TO","level":"Hypothesist","day":"월","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"2","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-13","raw":"TO_Experimenter_월7(M) (20:30~22:00) [14명] Jaerin An","type":"TO","level":"Experimenter","day":"월","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"14","instructor":"Jaerin An","duration":1.5,"roomId":"606"},{"id":"cls-1763705806079-14","raw":"TO_Experimenter_화4(E) (17:30~19:00) [3명] Jaerin An","type":"TO","level":"Experimenter","day":"화","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"3","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-15","raw":"TO_Hypothesist_화7(M) (19:00~20:30) [16명] Jaerin An","type":"TO","level":"Hypothesist","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"16","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-16","raw":"TO_Hypothesist_화7(M) (20:30~22:00) [16명] Jaerin An","type":"TO","level":"Hypothesist","day":"화","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"16","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-17","raw":"TO_Thinker_수4(E) (16:00~17:30) [2명] Jaerin An","type":"TO","level":"Thinker","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"2","instructor":"Jaerin An","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-18","raw":"TO_Hypothesist_목4(E) (17:30~19:00) [12명] Jaerin An","type":"TO","level":"Hypothesist","day":"목","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"12","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-19","raw":"TO_Experimenter_목7(M) (19:00~20:30) [13명] Jaerin An","type":"TO","level":"Experimenter","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"13","instructor":"Chanhee Yang","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-20","raw":"TO_Experimenter_목7(M) (20:30~22:00) [13명] Jaerin An","type":"TO","level":"Experimenter","day":"목","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"13","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-21","raw":"TO_Experimenter_금4(E) (17:30~19:00) [4명] Jaerin An","type":"TO","level":"Experimenter","day":"금","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"4","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-22","raw":"TO_Hypothesist_금7(M) (19:00~20:30) [5명] Jaerin An","type":"TO","level":"Hypothesist","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"5","instructor":"Jaerin An","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-23","raw":"TO_Hypothesist_금7(M) (20:30~22:00) [5명] Jaerin An","type":"TO","level":"Hypothesist","day":"금","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"5","instructor":"Jaerin An","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-24","raw":"TO_Hypothesist_월4(E) (16:00~17:30) [2명] Yongwon Choe","type":"TO","level":"Hypothesist","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"2","instructor":"Yongwon Choe","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-25","raw":"TO_Experimenter_화4(E) (16:00~17:30) [3명] Yongwon Choe","type":"TO","level":"Experimenter","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"3","instructor":"Yongwon Choe","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-26","raw":"TO_Thinker_수4(E) (17:30~19:00) [2명] Yongwon Choe","type":"TO","level":"Thinker","day":"수","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"2","instructor":"Yongwon Choe","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-27","raw":"TO_Hypothesist_목4(E) (16:00~17:30) [12명] Yongwon Choe","type":"TO","level":"Hypothesist","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"12","instructor":"Yongwon Choe","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-28","raw":"TO_Originator_목7(M) (20:30~22:00) [8명] Yongwon Choe","type":"TO","level":"Originator","day":"목","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"8","instructor":"Yongwon Choe","duration":1.5,"roomId":"AP 301"},{"id":"cls-1763705806079-29","raw":"TO_Experimenter_금4(E) (16:00~17:30) [4명] Yongwon Choe","type":"TO","level":"Experimenter","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"4","instructor":"Yongwon Choe","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-30","raw":"C2_Par_월4(E) (16:00~19:00) [6명] Aeneas Sparks-Webb","type":"C2","level":"Par","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"6","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-31","raw":"C1_Bridge_월7(M) (19:00~22:00) [4명] Aeneas Sparks-Webb","type":"C1","level":"Bridge","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"4","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-32","raw":"C2_Birdie_화4(E) (16:00~19:00) [13명] Aeneas Sparks-Webb","type":"C2","level":"Birdie","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"13","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-33","raw":"C2_Par_수4(E) (16:00~19:00) [5명] Aeneas Sparks-Webb","type":"C2","level":"Par","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-34","raw":"C2_Par_목4(E) (16:00~19:00) [13명] Aeneas Sparks-Webb","type":"C2","level":"Par","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"13","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-35","raw":"C1_Giga_금4(E) (16:00~19:00) [11명] Aeneas Sparks-Webb","type":"C1","level":"Giga","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"11","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-36","raw":"C1_Eagle_금7(M) (19:00~22:00) [2명] Aeneas Sparks-Webb","type":"C1","level":"Eagle","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"2","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-37","raw":"C1_Birdie_월4(E) (16:00~19:00) [7명] Christopher Ing","type":"C1","level":"Birdie","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"7","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-38","raw":"C2D_Eagle_화4(E) (16:00~19:00) [10명] Christopher Ing","type":"C2D","level":"Eagle","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"10","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-39","raw":"C2D_Albatross+_화7(M) (19:00~22:00) [6명] Christopher Ing","type":"C2D","level":"Albatross+","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"6","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-40","raw":"C2D_Eagle_수4(E) (16:00~19:00) [10명] Christopher Ing","type":"C2D","level":"Eagle","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"10","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-41","raw":"C1_Tera_목4(E) (16:00~19:00) [9명] Christopher Ing","type":"C1","level":"Tera","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"9","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-42","raw":"WD102_목7(M)_1 (19:00~22:00) [5명] Christopher Ing","type":"WD102","level":"WD102","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-43","raw":"C1_Tera_금4(E) (16:00~19:00) [12명] Christopher Ing","type":"C1","level":"Tera","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"12","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-44","raw":"C1_Bridge_월4(E) (16:00~19:00) [1명] Holley Bailey","type":"C1","level":"Bridge","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"1","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-45","raw":"C1_Par_화4(E)_1 (16:00~19:00) [8명] Holley Bailey","type":"C1","level":"Par","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"8","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-46","raw":"C1_Birdie_화7(M) (19:00~22:00) [5명] Holley Bailey","type":"C1","level":"Birdie","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-47","raw":"C1_Bridge_수4(E) (16:00~19:00) [7명] Holley Bailey","type":"C1","level":"Bridge","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"7","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-48","raw":"C2_Bridge_목4(E)_3 (16:00~19:00) [11명] Holley Bailey","type":"C2","level":"Bridge","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"11","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-49","raw":"C1_Albatross_목7(M)_1 (19:00~22:00) [9명] Holley Bailey","type":"C1","level":"Albatross","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"9","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-50","raw":"C1_Par_금4(E)_1 (16:00~19:00) [8명] Holley Bailey","type":"C1","level":"Par","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"8","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-51","raw":"C1_Birdie_금7(M) (19:00~22:00) [4명] Holley Bailey","type":"C1","level":"Birdie","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"4","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-52","raw":"C1_Albatross_월4(E) (16:00~19:00) [8명] Igor Pak","type":"C1","level":"Albatross","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"8","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-53","raw":"C1_Bridge_화4(E)_3 (16:00~19:00) [11명] Igor Pak","type":"C1","level":"Bridge","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"11","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-54","raw":"D101A_화7(M) (19:00~22:00) [7명] Igor Pak","type":"D101A","level":"D101A","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"7","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-55","raw":"C1_EC4_수4(E) (16:00~19:00) [5명] Igor Pak","type":"C1","level":"EC4","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-56","raw":"C2_Bridge_목4(E)_2 (16:00~19:00) [13명] Igor Pak","type":"C2","level":"Bridge","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"13","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-57","raw":"C1_Albatross_목7(M)_2 (19:00~22:00) [9명] Igor Pak","type":"C1","level":"Albatross","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"9","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-58","raw":"C2_EC4_금4(E) (16:00~19:00) [5명] Igor Pak","type":"C2","level":"EC4","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-59","raw":"C1_Albatross_금7(M) (19:00~22:00) [7명] Igor Pak","type":"C1","level":"Albatross","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"7","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-60","raw":"C1_Eagle_월4(E)_1 (16:00~19:00) [6명] Joseph Choi","type":"C1","level":"Eagle","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"6","instructor":"Joseph Choi","duration":3,"roomId":"602"},{"id":"cls-1763705806079-62","raw":"C1_Giga_목4(E) (16:00~19:00) [3명] Joseph Choi","type":"C1","level":"Giga","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"3","instructor":"Joseph Choi","duration":3,"roomId":"602"},{"id":"cls-1763705806079-63","raw":"D102C_목7(M) (19:00~22:00) [12명] Joseph Choi","type":"D102C","level":"D102C","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"12","instructor":"Joseph Choi","duration":3,"roomId":"602"},{"id":"cls-1763705806079-64","raw":"C2_Birdie_금4(E) (16:00~19:00) [3명] Joseph Choi","type":"C2","level":"Birdie","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"3","instructor":"Joseph Choi","duration":3,"roomId":"602"},{"id":"cls-1763705806079-65","raw":"C2_Tera_월4(E) (16:00~19:00) [12명] Karen Shelley","type":"C2","level":"Tera","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"12","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-66","raw":"C1_Par_월7(M) (19:00~22:00) [3명] Karen Shelley","type":"C1","level":"Par","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"3","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-67","raw":"C2_Tera_화4(E) (16:00~19:00) [9명] Karen Shelley","type":"C2","level":"Tera","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"9","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-68","raw":"C1_Eagle_화7(M) (19:00~22:00) [5명] Karen Shelley","type":"C1","level":"Eagle","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-69","raw":"C2_Mega_수4(E) (16:00~19:00) [14명] Karen Shelley","type":"C2","level":"Mega","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"14","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-70","raw":"C1_Birdie_목4(E)_1 (16:00~19:00) [12명] Karen Shelley","type":"C1","level":"Birdie","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"12","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-71","raw":"C1_Par_목7(M) (19:00~22:00) [3명] Karen Shelley","type":"C1","level":"Par","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"3","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-72","raw":"C1_Par_금4(E)_2 (16:00~19:00) [6명] Karen Shelley","type":"C1","level":"Par","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"6","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-73","raw":"C1_Eagle_월4(E)_2 (16:00~19:00) [6명] Lesley Anne Mayo","type":"C1","level":"Eagle","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"6","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-74","raw":"C2_Giga_화4(E) (16:00~19:00) [3명] Lesley Anne Mayo","type":"C2","level":"Giga","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"3","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-75","raw":"IM104_화7(M) (19:00~22:00) [6명] Lesley Anne Mayo","type":"IM104","level":"IM104","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"6","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-76","raw":"C2_Giga_수4(E) (16:00~19:00) [11명] Lesley Anne Mayo","type":"C2","level":"Giga","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"11","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-77","raw":"C1_Eagle_목4(E) (16:00~19:00) [12명] Lesley Anne Mayo","type":"C1","level":"Eagle","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"12","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-78","raw":"C1_Albatross+_목7(M)_2 (19:00~22:00) [5명] Lesley Anne Mayo","type":"C1","level":"Albatross+","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-79","raw":"C1_Mega_금4(E) (16:00~19:00) [14명] Lesley Anne Mayo","type":"C1","level":"Mega","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"14","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-80","raw":"IM104_금7(M) (19:00~22:00) [4명] Lesley Anne Mayo","type":"IM104","level":"IM104","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"4","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-81","raw":"C2D_Albatross_월7(M) (19:00~22:00) [3명] Olivia Constable","type":"C2D","level":"Albatross","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"3","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-82","raw":"C1_Par_화4(E)_2 (16:00~19:00) [14명] Olivia Constable","type":"C1","level":"Par","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"14","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-83","raw":"C2D_Albatross_화7(M) (19:00~22:00) [9명] Olivia Constable","type":"C2D","level":"Albatross","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"9","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-84","raw":"C2D_Albatross_수4(E) (16:00~19:00) [5명] Olivia Constable","type":"C2D","level":"Albatross","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-85","raw":"C2_Bridge_목4(E)_1 (16:00~19:00) [10명] Olivia Constable","type":"C2","level":"Bridge","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"10","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-86","raw":"C1_Albatross+_목7(M)_1 (19:00~22:00) [7명] Olivia Constable","type":"C1","level":"Albatross+","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"7","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-87","raw":"C2_Bridge_금4(E) (16:00~19:00) [5명] Olivia Constable","type":"C2","level":"Bridge","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-88","raw":"C1_Albatross+_금7(M) (19:00~22:00) [5명] Olivia Constable","type":"C1","level":"Albatross+","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-90","raw":"C1_Bridge_화4(E)_1 (16:00~19:00) [10명] Ryan S. Kim","type":"C1","level":"Bridge","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"10","instructor":"Ryan S. Kim","duration":3,"roomId":"407"},{"id":"cls-1763705806079-91","raw":"D102F_화7(M)_G (19:00~22:00) [12명] Ryan S. Kim","type":"D102F","level":"D102F","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"12","instructor":"Ryan S. Kim","duration":3,"roomId":"407"},{"id":"cls-1763705806079-92","raw":"C1_Birdie_목4(E)_2 (16:00~19:00) [7명] Ryan S. Kim","type":"C1","level":"Birdie","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"7","instructor":"Ryan S. Kim","duration":3,"roomId":"407"},{"id":"cls-1763705806079-93","raw":"WD102_목7(M)_2 (19:00~22:00) [8명] Ryan S. Kim","type":"WD102","level":"WD102","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"8","instructor":"Ryan S. Kim","duration":3,"roomId":"407"},{"id":"cls-1763705806079-94","raw":"CDI_내신_혼합_월5(M) (17:00~19:00) [3명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"월","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"3","instructor":"Yongwon Choe","duration":2,"roomId":"607"},{"id":"cls-1763705806079-95","raw":"CDI_내신_혼합_월7(M) (19:00~22:00) [4명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"4","instructor":"Yongwon Choe","duration":3,"roomId":"605"},{"id":"cls-1763705806079-96","raw":"CDI_내신_천재정2_화5(M) (17:00~19:00) [3명] Yongwon Choe","type":"CDI","level":"내신_천재정2","day":"화","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"3","instructor":"Yongwon Choe","duration":2,"roomId":"607"},{"id":"cls-1763705806079-98","raw":"CDI_내신_혼합_화5(M) (17:00~19:00) [5명] Chanhee Yang","type":"CDI","level":"내신_혼합","day":"화","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"5","instructor":"Rachel Park","duration":2,"roomId":"402"},{"id":"cls-1763705806079-99","raw":"CDI_내신_혼합_목5(M) (17:00~19:00) [5명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"목","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"5","instructor":"Yongwon Choe","duration":2,"roomId":"402"},{"id":"cls-1763705806079-100","raw":"CDI_내신_비상김3 AP 세미나_목7(M) (19:00~22:00) [3명] Yongwon Choe","type":"CDI","level":"내신_비상김3 AP 세미나","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"3","instructor":"Yongwon Choe","duration":1.5,"roomId":"AP 세미나실"},{"id":"cls-1763705806079-102","raw":"CDI_내신_혼합_목5(M) (17:00~19:00) [5명] Chanhee Yang","type":"CDI","level":"내신_혼합","day":"목","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"5","instructor":"Chanhee Yang","duration":2,"roomId":"402"},{"id":"cls-1763705806079-103","raw":"CDI_내신_천재이_목5(M) (17:00~19:00) [9명] Seungeun Lee","type":"CDI","level":"내신_천재이","day":"목","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"9","instructor":"Rachel Park","duration":2,"roomId":"AP 301"},{"id":"cls-1763705806079-104","raw":"CDI_내신_혼합_금5(M) (17:00~19:00) [3명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"금","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"3","instructor":"Yongwon Choe","duration":2,"roomId":"607"},{"id":"cls-1763705806079-105","raw":"CDI_내신_혼합_금7(M) (19:00~22:00) [5명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Yongwon Choe","duration":3,"roomId":"605"}],"rooms":["401","402","403","404","405","406","407","601","602","603","605","606","607","AP 세미나실","AP 301"],"instructorPrefs":{"Aeneas Sparks-Webb":"404","Christopher Ing":"603","Holley Bailey":"401","Igor Pak":"606","Joseph Choi":"602","Karen Shelley":"406","Lesley Anne Mayo":"601","Olivia Constable":"405","Ryan S. Kim":"407"},"version":1763705814328};
+        /* 배포용 데이터 영역 */
+        const PRELOADED_DATA = {"rawInput":"CDI_내신(동아윤1)_월5(M) (17:00~19:00) [6명] Nahyun Kang\nC2D_Albatross_월7(M) (19:00~22:00) [3명] Olivia Constable\nCDI_Birdie_화5(E) (16:00~18:30) [8명] John Doe\nTO_Originator_화7(M)_1 (19:00~22:00) [4명] Jane Smith","classes":[{"id":"cls-1763705806078-0","raw":"TO_Hypothesist_화4(E) (16:00~17:30) [7명] Chanhee Yang","type":"TO","level":"Hypothesist","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"7","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-1","raw":"TO_Hypothesist_화4(E) (17:30~19:00) [7명] Chanhee Yang","type":"TO","level":"Hypothesist","day":"화","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"7","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-2","raw":"TO_Originator_화7(M)_1 (19:00~20:30) [13명] Chanhee Yang","type":"TO","level":"Originator","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"13","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-3","raw":"TO_Experimenter_화7(M) (20:30~22:00) [15명] Chanhee Yang","type":"TO","level":"Experimenter","day":"화","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"15","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-4","raw":"TO_Originator_목7(M) (19:00~20:30) [8명] Chanhee Yang","type":"TO","level":"Originator","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"8","instructor":"Jaerin An","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-5","raw":"TO_Hypothesist_금4(E) (16:00~17:30) [7명] Chanhee Yang","type":"TO","level":"Hypothesist","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"7","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-6","raw":"TO_Hypothesist_금4(E) (17:30~19:00) [7명] Chanhee Yang","type":"TO","level":"Hypothesist","day":"금","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"7","instructor":"Chanhee Yang","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-7","raw":"TO_Experimenter_월7(M) (19:00~20:30) [14명] gina kim","type":"TO","level":"Experimenter","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"14","instructor":"gina kim","duration":1.5,"roomId":"606"},{"id":"cls-1763705806079-9","raw":"TO_Experimenter_화7(M) (19:00~20:30) [15명] gina kim","type":"TO","level":"Experimenter","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"15","instructor":"gina kim","duration":1.5,"roomId":"602"},{"id":"cls-1763705806079-10","raw":"TO_Originator_화7(M)_1 (20:30~22:00) [13명] gina kim","type":"TO","level":"Originator","day":"화","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"13","instructor":"gina kim","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-11","raw":"TO_Hypothesist_월4(E) (17:30~19:00) [2명] Jaerin An","type":"TO","level":"Hypothesist","day":"월","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"2","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-13","raw":"TO_Experimenter_월7(M) (20:30~22:00) [14명] Jaerin An","type":"TO","level":"Experimenter","day":"월","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"14","instructor":"Jaerin An","duration":1.5,"roomId":"606"},{"id":"cls-1763705806079-14","raw":"TO_Experimenter_화4(E) (17:30~19:00) [3명] Jaerin An","type":"TO","level":"Experimenter","day":"화","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"3","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-15","raw":"TO_Hypothesist_화7(M) (19:00~20:30) [16명] Jaerin An","type":"TO","level":"Hypothesist","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"16","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-16","raw":"TO_Hypothesist_화7(M) (20:30~22:00) [16명] Jaerin An","type":"TO","level":"Hypothesist","day":"화","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"16","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-17","raw":"TO_Thinker_수4(E) (16:00~17:30) [2명] Jaerin An","type":"TO","level":"Thinker","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"2","instructor":"Jaerin An","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-18","raw":"TO_Hypothesist_목4(E) (17:30~19:00) [12명] Jaerin An","type":"TO","level":"Hypothesist","day":"목","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"12","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-19","raw":"TO_Experimenter_목7(M) (19:00~20:30) [13명] Jaerin An","type":"TO","level":"Experimenter","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"13","instructor":"Chanhee Yang","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-20","raw":"TO_Experimenter_목7(M) (20:30~22:00) [13명] Jaerin An","type":"TO","level":"Experimenter","day":"목","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"13","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-21","raw":"TO_Experimenter_금4(E) (17:30~19:00) [4명] Jaerin An","type":"TO","level":"Experimenter","day":"금","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"4","instructor":"Jaerin An","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-22","raw":"TO_Hypothesist_금7(M) (19:00~20:30) [5명] Jaerin An","type":"TO","level":"Hypothesist","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"5","instructor":"Jaerin An","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-23","raw":"TO_Hypothesist_금7(M) (20:30~22:00) [5명] Jaerin An","type":"TO","level":"Hypothesist","day":"금","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"5","instructor":"Jaerin An","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-24","raw":"TO_Hypothesist_월4(E) (16:00~17:30) [2명] Yongwon Choe","type":"TO","level":"Hypothesist","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"2","instructor":"Yongwon Choe","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-25","raw":"TO_Experimenter_화4(E) (16:00~17:30) [3명] Yongwon Choe","type":"TO","level":"Experimenter","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"3","instructor":"Yongwon Choe","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-26","raw":"TO_Thinker_수4(E) (17:30~19:00) [2명] Yongwon Choe","type":"TO","level":"Thinker","day":"수","period":"4","studentType":"E","startTime":"17:30","endTime":"19:00","startMin":1050,"endMin":1140,"count":"2","instructor":"Yongwon Choe","duration":1.5,"roomId":"403"},{"id":"cls-1763705806079-27","raw":"TO_Hypothesist_목4(E) (16:00~17:30) [12명] Yongwon Choe","type":"TO","level":"Hypothesist","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"12","instructor":"Yongwon Choe","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-28","raw":"TO_Originator_목7(M) (20:30~22:00) [8명] Yongwon Choe","type":"TO","level":"Originator","day":"목","period":"7","studentType":"M","startTime":"20:30","endTime":"22:00","startMin":1230,"endMin":1320,"count":"8","instructor":"Yongwon Choe","duration":1.5,"roomId":"AP 301"},{"id":"cls-1763705806079-29","raw":"TO_Experimenter_금4(E) (16:00~17:30) [4명] Yongwon Choe","type":"TO","level":"Experimenter","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"17:30","startMin":960,"endMin":1050,"count":"4","instructor":"Yongwon Choe","duration":1.5,"roomId":"605"},{"id":"cls-1763705806079-30","raw":"C2_Par_월4(E) (16:00~19:00) [6명] Aeneas Sparks-Webb","type":"C2","level":"Par","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"6","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-31","raw":"C1_Bridge_월7(M) (19:00~22:00) [4명] Aeneas Sparks-Webb","type":"C1","level":"Bridge","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"4","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-32","raw":"C2_Birdie_화4(E) (16:00~19:00) [13명] Aeneas Sparks-Webb","type":"C2","level":"Birdie","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"13","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-33","raw":"C2_Par_수4(E) (16:00~19:00) [5명] Aeneas Sparks-Webb","type":"C2","level":"Par","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-34","raw":"C2_Par_목4(E) (16:00~19:00) [13명] Aeneas Sparks-Webb","type":"C2","level":"Par","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"13","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-35","raw":"C1_Giga_금4(E) (16:00~19:00) [11명] Aeneas Sparks-Webb","type":"C1","level":"Giga","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"11","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-36","raw":"C1_Eagle_금7(M) (19:00~22:00) [2명] Aeneas Sparks-Webb","type":"C1","level":"Eagle","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"2","instructor":"Aeneas Sparks-Webb","duration":3,"roomId":"404"},{"id":"cls-1763705806079-37","raw":"C1_Birdie_월4(E) (16:00~19:00) [7명] Christopher Ing","type":"C1","level":"Birdie","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"7","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-38","raw":"C2D_Eagle_화4(E) (16:00~19:00) [10명] Christopher Ing","type":"C2D","level":"Eagle","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"10","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-39","raw":"C2D_Albatross+_화7(M) (19:00~22:00) [6명] Christopher Ing","type":"C2D","level":"Albatross+","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"6","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-40","raw":"C2D_Eagle_수4(E) (16:00~19:00) [10명] Christopher Ing","type":"C2D","level":"Eagle","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"10","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-41","raw":"C1_Tera_목4(E) (16:00~19:00) [9명] Christopher Ing","type":"C1","level":"Tera","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"9","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-42","raw":"WD102_목7(M)_1 (19:00~22:00) [5명] Christopher Ing","type":"WD102","level":"WD102","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-43","raw":"C1_Tera_금4(E) (16:00~19:00) [12명] Christopher Ing","type":"C1","level":"Tera","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"12","instructor":"Christopher Ing","duration":3,"roomId":"603"},{"id":"cls-1763705806079-44","raw":"C1_Bridge_월4(E) (16:00~19:00) [1명] Holley Bailey","type":"C1","level":"Bridge","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"1","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-45","raw":"C1_Par_화4(E)_1 (16:00~19:00) [8명] Holley Bailey","type":"C1","level":"Par","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"8","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-46","raw":"C1_Birdie_화7(M) (19:00~22:00) [5명] Holley Bailey","type":"C1","level":"Birdie","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-47","raw":"C1_Bridge_수4(E) (16:00~19:00) [7명] Holley Bailey","type":"C1","level":"Bridge","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"7","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-48","raw":"C2_Bridge_목4(E)_3 (16:00~19:00) [11명] Holley Bailey","type":"C2","level":"Bridge","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"11","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-49","raw":"C1_Albatross_목7(M)_1 (19:00~22:00) [9명] Holley Bailey","type":"C1","level":"Albatross","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"9","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-50","raw":"C1_Par_금4(E)_1 (16:00~19:00) [8명] Holley Bailey","type":"C1","level":"Par","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"8","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-51","raw":"C1_Birdie_금7(M) (19:00~22:00) [4명] Holley Bailey","type":"C1","level":"Birdie","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"4","instructor":"Holley Bailey","duration":3,"roomId":"401"},{"id":"cls-1763705806079-52","raw":"C1_Albatross_월4(E) (16:00~19:00) [8명] Igor Pak","type":"C1","level":"Albatross","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"8","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-53","raw":"C1_Bridge_화4(E)_3 (16:00~19:00) [11명] Igor Pak","type":"C1","level":"Bridge","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"11","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-54","raw":"D101A_화7(M) (19:00~22:00) [7명] Igor Pak","type":"D101A","level":"D101A","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"7","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-55","raw":"C1_EC4_수4(E) (16:00~19:00) [5명] Igor Pak","type":"C1","level":"EC4","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-56","raw":"C2_Bridge_목4(E)_2 (16:00~19:00) [13명] Igor Pak","type":"C2","level":"Bridge","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"13","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-57","raw":"C1_Albatross_목7(M)_2 (19:00~22:00) [9명] Igor Pak","type":"C1","level":"Albatross","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"9","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-58","raw":"C2_EC4_금4(E) (16:00~19:00) [5명] Igor Pak","type":"C2","level":"EC4","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-59","raw":"C1_Albatross_금7(M) (19:00~22:00) [7명] Igor Pak","type":"C1","level":"Albatross","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"7","instructor":"Igor Pak","duration":3,"roomId":"606"},{"id":"cls-1763705806079-60","raw":"C1_Eagle_월4(E)_1 (16:00~19:00) [6명] Joseph Choi","type":"C1","level":"Eagle","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"6","instructor":"Joseph Choi","duration":3,"roomId":"602"},{"id":"cls-1763705806079-62","raw":"C1_Giga_목4(E) (16:00~19:00) [3명] Joseph Choi","type":"C1","level":"Giga","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"3","instructor":"Joseph Choi","duration":3,"roomId":"602"},{"id":"cls-1763705806079-63","raw":"D102C_목7(M) (19:00~22:00) [12명] Joseph Choi","type":"D102C","level":"D102C","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"12","instructor":"Joseph Choi","duration":3,"roomId":"602"},{"id":"cls-1763705806079-64","raw":"C2_Birdie_금4(E) (16:00~19:00) [3명] Joseph Choi","type":"C2","level":"Birdie","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"3","instructor":"Joseph Choi","duration":3,"roomId":"602"},{"id":"cls-1763705806079-65","raw":"C2_Tera_월4(E) (16:00~19:00) [12명] Karen Shelley","type":"C2","level":"Tera","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"12","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-66","raw":"C1_Par_월7(M) (19:00~22:00) [3명] Karen Shelley","type":"C1","level":"Par","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"3","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-67","raw":"C2_Tera_화4(E) (16:00~19:00) [9명] Karen Shelley","type":"C2","level":"Tera","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"9","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-68","raw":"C1_Eagle_화7(M) (19:00~22:00) [5명] Karen Shelley","type":"C1","level":"Eagle","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-69","raw":"C2_Mega_수4(E) (16:00~19:00) [14명] Karen Shelley","type":"C2","level":"Mega","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"14","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-70","raw":"C1_Birdie_목4(E)_1 (16:00~19:00) [12명] Karen Shelley","type":"C1","level":"Birdie","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"12","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-71","raw":"C1_Par_목7(M) (19:00~22:00) [3명] Karen Shelley","type":"C1","level":"Par","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"3","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-72","raw":"C1_Par_금4(E)_2 (16:00~19:00) [6명] Karen Shelley","type":"C1","level":"Par","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"6","instructor":"Karen Shelley","duration":3,"roomId":"406"},{"id":"cls-1763705806079-73","raw":"C1_Eagle_월4(E)_2 (16:00~19:00) [6명] Lesley Anne Mayo","type":"C1","level":"Eagle","day":"월","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"6","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-74","raw":"C2_Giga_화4(E) (16:00~19:00) [3명] Lesley Anne Mayo","type":"C2","level":"Giga","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"3","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-75","raw":"IM104_화7(M) (19:00~22:00) [6명] Lesley Anne Mayo","type":"IM104","level":"IM104","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"6","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-76","raw":"C2_Giga_수4(E) (16:00~19:00) [11명] Lesley Anne Mayo","type":"C2","level":"Giga","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"11","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-77","raw":"C1_Eagle_목4(E) (16:00~19:00) [12명] Lesley Anne Mayo","type":"C1","level":"Eagle","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"12","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-78","raw":"C1_Albatross+_목7(M)_2 (19:00~22:00) [5명] Lesley Anne Mayo","type":"C1","level":"Albatross+","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-79","raw":"C1_Mega_금4(E) (16:00~19:00) [14명] Lesley Anne Mayo","type":"C1","level":"Mega","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"14","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-80","raw":"IM104_금7(M) (19:00~22:00) [4명] Lesley Anne Mayo","type":"IM104","level":"IM104","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"4","instructor":"Lesley Anne Mayo","duration":3,"roomId":"601"},{"id":"cls-1763705806079-81","raw":"C2D_Albatross_월7(M) (19:00~22:00) [3명] Olivia Constable","type":"C2D","level":"Albatross","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"3","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-82","raw":"C1_Par_화4(E)_2 (16:00~19:00) [14명] Olivia Constable","type":"C1","level":"Par","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"14","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-83","raw":"C2D_Albatross_화7(M) (19:00~22:00) [9명] Olivia Constable","type":"C2D","level":"Albatross","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"9","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-84","raw":"C2D_Albatross_수4(E) (16:00~19:00) [5명] Olivia Constable","type":"C2D","level":"Albatross","day":"수","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-85","raw":"C2_Bridge_목4(E)_1 (16:00~19:00) [10명] Olivia Constable","type":"C2","level":"Bridge","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"10","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-86","raw":"C1_Albatross+_목7(M)_1 (19:00~22:00) [7명] Olivia Constable","type":"C1","level":"Albatross+","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"7","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-87","raw":"C2_Bridge_금4(E) (16:00~19:00) [5명] Olivia Constable","type":"C2","level":"Bridge","day":"금","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"5","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-88","raw":"C1_Albatross+_금7(M) (19:00~22:00) [5명] Olivia Constable","type":"C1","level":"Albatross+","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Olivia Constable","duration":3,"roomId":"405"},{"id":"cls-1763705806079-90","raw":"C1_Bridge_화4(E)_1 (16:00~19:00) [10명] Ryan S. Kim","type":"C1","level":"Bridge","day":"화","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"10","instructor":"Ryan S. Kim","duration":3,"roomId":"407"},{"id":"cls-1763705806079-91","raw":"D102F_화7(M)_G (19:00~22:00) [12명] Ryan S. Kim","type":"D102F","level":"D102F","day":"화","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"12","instructor":"Ryan S. Kim","duration":3,"roomId":"407"},{"id":"cls-1763705806079-92","raw":"C1_Birdie_목4(E)_2 (16:00~19:00) [7명] Ryan S. Kim","type":"C1","level":"Birdie","day":"목","period":"4","studentType":"E","startTime":"16:00","endTime":"19:00","startMin":960,"endMin":1140,"count":"7","instructor":"Ryan S. Kim","duration":3,"roomId":"407"},{"id":"cls-1763705806079-93","raw":"WD102_목7(M)_2 (19:00~22:00) [8명] Ryan S. Kim","type":"WD102","level":"WD102","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"8","instructor":"Ryan S. Kim","duration":3,"roomId":"407"},{"id":"cls-1763705806079-94","raw":"CDI_내신_혼합_월5(M) (17:00~19:00) [3명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"월","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"3","instructor":"Yongwon Choe","duration":2,"roomId":"607"},{"id":"cls-1763705806079-95","raw":"CDI_내신_혼합_월7(M) (19:00~22:00) [4명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"월","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"4","instructor":"Yongwon Choe","duration":3,"roomId":"605"},{"id":"cls-1763705806079-96","raw":"CDI_내신_천재정2_화5(M) (17:00~19:00) [3명] Yongwon Choe","type":"CDI","level":"내신_천재정2","day":"화","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"3","instructor":"Yongwon Choe","duration":2,"roomId":"607"},{"id":"cls-1763705806079-98","raw":"CDI_내신_혼합_화5(M) (17:00~19:00) [5명] Chanhee Yang","type":"CDI","level":"내신_혼합","day":"화","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"5","instructor":"Rachel Park","duration":2,"roomId":"402"},{"id":"cls-1763705806079-99","raw":"CDI_내신_혼합_목5(M) (17:00~19:00) [5명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"목","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"5","instructor":"Yongwon Choe","duration":2,"roomId":"402"},{"id":"cls-1763705806079-100","raw":"CDI_내신_비상김3 AP 세미나_목7(M) (19:00~22:00) [3명] Yongwon Choe","type":"CDI","level":"내신_비상김3 AP 세미나","day":"목","period":"7","studentType":"M","startTime":"19:00","endTime":"20:30","startMin":1140,"endMin":1230,"count":"3","instructor":"Yongwon Choe","duration":1.5,"roomId":"AP 세미나실"},{"id":"cls-1763705806079-102","raw":"CDI_내신_혼합_목5(M) (17:00~19:00) [5명] Chanhee Yang","type":"CDI","level":"내신_혼합","day":"목","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"5","instructor":"Chanhee Yang","duration":2,"roomId":"402"},{"id":"cls-1763705806079-103","raw":"CDI_내신_천재이_목5(M) (17:00~19:00) [9명] Seungeun Lee","type":"CDI","level":"내신_천재이","day":"목","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"9","instructor":"Rachel Park","duration":2,"roomId":"AP 301"},{"id":"cls-1763705806079-104","raw":"CDI_내신_혼합_금5(M) (17:00~19:00) [3명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"금","period":"5","studentType":"M","startTime":"17:00","endTime":"19:00","startMin":1020,"endMin":1140,"count":"3","instructor":"Yongwon Choe","duration":2,"roomId":"607"},{"id":"cls-1763705806079-105","raw":"CDI_내신_혼합_금7(M) (19:00~22:00) [5명] Yongwon Choe","type":"CDI","level":"내신_혼합","day":"금","period":"7","studentType":"M","startTime":"19:00","endTime":"22:00","startMin":1140,"endMin":1320,"count":"5","instructor":"Yongwon Choe","duration":3,"roomId":"605"}],"rooms":["401","402","403","404","405","406","407","601","602","603","605","606","607","AP 세미나실","AP 301"],"instructorPrefs":{"Aeneas Sparks-Webb":"404","Christopher Ing":"603","Holley Bailey":"401","Igor Pak":"606","Joseph Choi":"602","Karen Shelley":"406","Lesley Anne Mayo":"601","Olivia Constable":"405","Ryan S. Kim":"407"}}; ; 
 
         const { useState, useEffect, useMemo, useCallback } = React;
         
@@ -75,7 +67,7 @@
             check: "M5 13l4 4L19 7",
             palette: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
             wand2: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
-            settings: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+            settings: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
             table: "M3 10h18M3 14h18m-9-4v8m-7.5-8v8m15-8v8M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z",
             download: "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4",
             layout: "M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z",
@@ -136,8 +128,95 @@
             );
         };
 
+        // --- Add Class Modal (New) ---
+        const AddClassModal = ({ onClose, onAdd, rooms }) => {
+            const [form, setForm] = useState({
+                type: 'General',
+                level: '',
+                instructor: '',
+                day: '월',
+                startTime: '14:00',
+                endTime: '16:00',
+                count: 0,
+                studentType: 'All',
+                roomId: ''
+            });
+
+            const handleChange = (field, value) => setForm(prev => ({ ...prev, [field]: value }));
+
+            const handleSubmit = () => {
+                if(!form.level || !form.instructor) return alert("강의명(Level)과 강사명은 필수입니다.");
+                onAdd(form);
+                onClose();
+            };
+
+            return (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose}></div>
+                    <div className="bg-white w-full max-w-md rounded-xl shadow-2xl z-10 overflow-hidden">
+                        <div className="p-4 bg-indigo-50 border-b border-indigo-100 flex justify-between items-center">
+                            <h3 className="font-bold text-indigo-800 flex items-center gap-2"><Icon path={ICONS.plus} size={18} /> 새 강의 추가</h3>
+                            <button onClick={onClose} className="text-indigo-400 hover:text-indigo-600"><Icon path={ICONS.x} size={20} /></button>
+                        </div>
+                        <div className="p-6 space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 mb-1">Type</label>
+                                    <input className="w-full p-2 border rounded text-sm" value={form.type} onChange={e => handleChange('type', e.target.value)} />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 mb-1">Student Type</label>
+                                    <input className="w-full p-2 border rounded text-sm" value={form.studentType} onChange={e => handleChange('studentType', e.target.value)} />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-gray-500 mb-1">Level (강의명)</label>
+                                <input className="w-full p-2 border rounded text-sm" placeholder="예: Calculus 101" value={form.level} onChange={e => handleChange('level', e.target.value)} />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-gray-500 mb-1">Instructor</label>
+                                <input className="w-full p-2 border rounded text-sm" placeholder="강사 이름" value={form.instructor} onChange={e => handleChange('instructor', e.target.value)} />
+                            </div>
+                             <div className="grid grid-cols-3 gap-4">
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 mb-1">Day</label>
+                                    <select className="w-full p-2 border rounded text-sm" value={form.day} onChange={e => handleChange('day', e.target.value)}>
+                                        {DAYS.map(d => <option key={d} value={d}>{d}</option>)}
+                                    </select>
+                                </div>
+                                <div className="col-span-2 grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-500 mb-1">Start</label>
+                                        <input type="time" className="w-full p-2 border rounded text-sm" value={form.startTime} onChange={e => handleChange('startTime', e.target.value)} />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-500 mb-1">End</label>
+                                        <input type="time" className="w-full p-2 border rounded text-sm" value={form.endTime} onChange={e => handleChange('endTime', e.target.value)} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 mb-1">Students</label>
+                                    <input type="number" className="w-full p-2 border rounded text-sm" value={form.count} onChange={e => handleChange('count', e.target.value)} />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 mb-1">Room (Optional)</label>
+                                    <select className="w-full p-2 border rounded text-sm" value={form.roomId} onChange={e => handleChange('roomId', e.target.value)}>
+                                        <option value="">-- Unassigned --</option>
+                                        {rooms.map(r => <option key={r} value={r}>{r}</option>)}
+                                    </select>
+                                </div>
+                            </div>
+                            <button onClick={handleSubmit} className="w-full py-2 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition-colors shadow-md mt-2">추가하기</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
         // --- DayTimetable Component ---
-        const DayTimetable = React.memo(({ day, rooms, classes, onAssignRoom, getClassStyle, fullWidth = false, readOnly = false }) => {
+        const DayTimetable = React.memo(({ day, rooms, classes, onAssignRoom, getClassStyle, fullWidth = false, readOnly = false, onExportExcel }) => {
             const dayClasses = classes.filter(c => c.day === day && c.roomId);
             const totalMinutes = (END_HOUR - START_HOUR) * 60;
             
@@ -145,7 +224,21 @@
                 <div className={`bg-white rounded-xl shadow-sm border flex flex-col overflow-hidden h-full ${readOnly ? 'border-indigo-100' : 'border-gray-200'}`}>
                     <div className={`p-3 border-b font-bold flex justify-between items-center ${readOnly ? 'bg-indigo-50 border-indigo-100 text-indigo-800' : 'bg-gray-50 border-gray-100 text-gray-700'}`}>
                         <span>{DAY_MAP[day]} ({day})</span>
-                        {fullWidth && <span className="text-xs opacity-60 font-normal">{START_HOUR}:00 - {END_HOUR}:00</span>}
+                        <div className="flex items-center gap-2">
+                            {fullWidth && <span className="text-xs opacity-60 font-normal mr-2">{START_HOUR}:00 - {END_HOUR}:00</span>}
+                            
+                            {/* --- Contextual Excel Export Button (Dashboard View) --- */}
+                            {!fullWidth && (
+                                <button 
+                                    onClick={() => onExportExcel(day)}
+                                    className="flex items-center gap-1 px-2 py-1 bg-green-50 text-green-700 hover:bg-green-100 border border-green-200 rounded text-xs transition-colors"
+                                    title={`${day}요일 시간표 엑셀 복사`}
+                                >
+                                    <Icon path={ICONS.download} size={12} />
+                                    <span className="hidden sm:inline">일일 엑셀 복사</span>
+                                </button>
+                            )}
+                        </div>
                     </div>
                     
                     <div className="flex-1 overflow-x-auto overflow-y-auto p-2 relative">
@@ -256,30 +349,14 @@
           const [viewSource, setViewSource] = useState('personal'); // 'personal' | 'distributed'
           const [licenseAgreed, setLicenseAgreed] = useState(() => localStorage.getItem(STORAGE_KEYS.LICENSE_AGREED) === 'true');
 
-          // Helper to format timestamps
           const formatTime = (ts) => {
               if (!ts) return '없음';
               return new Date(parseInt(ts)).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
           };
 
-          // --- Data Loading Logic ---
-          // Personal Data (from LocalStorage)
           const loadLocalData = (key, defaultVal) => {
               const saved = localStorage.getItem(key);
               return saved ? JSON.parse(saved) : defaultVal;
-          };
-
-          // Distributed Data (from Preloaded)
-          const loadDistributedData = (key, defaultVal) => {
-              if (PRELOADED_DATA && PRELOADED_DATA[key]) return PRELOADED_DATA[key]; // Map key properly
-              // Map Keys: RAW_INPUT -> rawInput, CLASSES -> classes, etc.
-              if (PRELOADED_DATA) {
-                  if (key === STORAGE_KEYS.RAW_INPUT) return PRELOADED_DATA.rawInput;
-                  if (key === STORAGE_KEYS.CLASSES) return PRELOADED_DATA.classes;
-                  if (key === STORAGE_KEYS.ROOMS) return PRELOADED_DATA.rooms;
-                  if (key === STORAGE_KEYS.PREFS) return PRELOADED_DATA.instructorPrefs;
-              }
-              return defaultVal;
           };
 
           // Initialize with Local Data by default
@@ -291,8 +368,7 @@
           const [rooms, setRooms] = useState(() => loadLocalData(STORAGE_KEYS.ROOMS, ['401', '402', '403', '404', '405', '406', '407', '601', '602', '603', '605', '606', '607']));
           const [instructorPrefs, setInstructorPrefs] = useState(() => loadLocalData(STORAGE_KEYS.PREFS, {}));
           
-          // Timestamps
-          const localVersion = useMemo(() => localStorage.getItem(STORAGE_KEYS.VERSION), [classes]); // Re-read when classes change effectively
+          const localVersion = useMemo(() => localStorage.getItem(STORAGE_KEYS.VERSION), [classes]); 
           const distVersion = PRELOADED_DATA ? PRELOADED_DATA.version : null;
 
           // UI State
@@ -306,20 +382,19 @@
           const [showPrefModal, setShowPrefModal] = useState(false);
           const [showClearModal, setShowClearModal] = useState(false);
           const [showImportExportModal, setShowImportExportModal] = useState(false);
+          const [showAddClassModal, setShowAddClassModal] = useState(false); // New Class Modal
           const [spreadsheetInput, setSpreadsheetInput] = useState('');
           const [toast, setToast] = useState({ show: false, message: '' });
 
-          // --- Data Switching Effect ---
+          // Effects
           useEffect(() => {
               if (viewSource === 'personal') {
-                  // Reload Local Data
                   setRawInput(localStorage.getItem(STORAGE_KEYS.RAW_INPUT) || "");
                   setClasses(loadLocalData(STORAGE_KEYS.CLASSES, []));
                   setRooms(loadLocalData(STORAGE_KEYS.ROOMS, ['401', '402', '403', '404', '405', '406', '407', '601', '602', '603', '605', '606', '607']));
                   setInstructorPrefs(loadLocalData(STORAGE_KEYS.PREFS, {}));
                   showToast("📂 내 시간표(Personal) 모드로 전환되었습니다.");
               } else {
-                  // Load Distributed Data
                   if (PRELOADED_DATA) {
                       setRawInput(PRELOADED_DATA.rawInput || "");
                       setClasses(PRELOADED_DATA.classes || []);
@@ -333,13 +408,11 @@
               }
           }, [viewSource]);
 
-          // --- Auto-Save Logic (Only for Personal Mode) ---
           useEffect(() => {
               localStorage.setItem(STORAGE_KEYS.LICENSE_AGREED, licenseAgreed);
           }, [licenseAgreed]);
 
           useEffect(() => {
-              // CRITICAL: Only save if we are in Personal mode
               if (viewSource === 'personal') {
                   localStorage.setItem(STORAGE_KEYS.RAW_INPUT, rawInput);
                   localStorage.setItem(STORAGE_KEYS.CLASSES, JSON.stringify(classes));
@@ -349,7 +422,6 @@
               }
           }, [rawInput, classes, rooms, instructorPrefs, viewSource]);
 
-          // Toast Interval
           useEffect(() => {
             const saveInterval = setInterval(() => { 
                 if (viewSource === 'personal') {
@@ -362,20 +434,35 @@
           const showToast = (msg) => { setToast({ show: true, message: msg }); setTimeout(() => setToast({ show: false, message: '' }), 3000); };
           const confirmReset = () => { localStorage.clear(); window.location.reload(); };
 
-          // --- Overwrite Personal with Distributed ---
-          const resetToDistributed = () => {
-              if (!PRELOADED_DATA) return alert("배포된 데이터가 없습니다.");
-              if (confirm("⚠️ 경고: 현재 작업 중인 '내 시간표'를 모두 지우고,\n'배포된 원본' 데이터로 덮어쓰시겠습니까?")) {
-                  localStorage.setItem(STORAGE_KEYS.RAW_INPUT, PRELOADED_DATA.rawInput);
-                  localStorage.setItem(STORAGE_KEYS.CLASSES, JSON.stringify(PRELOADED_DATA.classes));
-                  localStorage.setItem(STORAGE_KEYS.ROOMS, JSON.stringify(PRELOADED_DATA.rooms));
-                  localStorage.setItem(STORAGE_KEYS.PREFS, JSON.stringify(PRELOADED_DATA.instructorPrefs));
-                  localStorage.setItem(STORAGE_KEYS.VERSION, Date.now().toString());
-                  window.location.reload();
-              }
+          // Actions
+          const handleAddManualClass = (form) => {
+              const sParts = form.startTime.split(':').map(Number);
+              const eParts = form.endTime.split(':').map(Number);
+              const sMin = sParts[0] * 60 + sParts[1];
+              const eMin = eParts[0] * 60 + eParts[1];
+              const duration = (eMin - sMin) / 60;
+
+              const newClass = {
+                  id: `cls-man-${Date.now()}`,
+                  raw: "Manual Entry",
+                  type: form.type,
+                  level: form.level,
+                  day: form.day,
+                  period: "",
+                  studentType: form.studentType,
+                  startTime: form.startTime,
+                  endTime: form.endTime,
+                  startMin: sMin,
+                  endMin: eMin,
+                  count: form.count,
+                  instructor: form.instructor,
+                  duration: duration,
+                  roomId: form.roomId || null
+              };
+              setClasses(prev => [...prev, newClass]);
+              showToast("강의가 추가되었습니다.");
           };
 
-          // Parsing (Only allowed in Personal mode)
           const parseData = () => {
             if (viewSource !== 'personal') return alert("읽기 전용 모드입니다.");
             const lines = rawInput.split('\n').filter(line => line.trim() !== '');
@@ -468,32 +555,50 @@
           }, [colorScheme]);
 
           // Copy/Import Functions
-          const copyToClipboardWithStyle = () => {
+          const copyToClipboardWithStyle = (targetDay) => {
               const timeSlots = [];
               for(let h = START_HOUR; h < END_HOUR; h++) { timeSlots.push({ label: `${h.toString().padStart(2,'0')}:00`, min: h * 60 }); timeSlots.push({ label: `${h.toString().padStart(2,'0')}:30`, min: h * 60 + 30 }); }
-              let html = `<table border="1" style="border-collapse: collapse; text-align: center; font-family: sans-serif; font-size: 12px;">`;
-              html += `<thead><tr><th style="background-color: #e5e7eb; width: 80px; height: 30px;">시간 / 강의실</th>`;
-              rooms.forEach(r => { html += `<th style="background-color: #e5e7eb; width: 120px;">${r}</th>`; });
-              html += `</tr></thead><tbody>`;
-              const skipMap = {}; 
-              timeSlots.forEach((slot, tIdx) => {
-                  html += `<tr><td style="background-color: #f3f4f6; font-weight: bold; height: 30px;">${slot.label}</td>`;
-                  rooms.forEach((room, rIdx) => {
-                      const mapKey = `${rIdx}-${tIdx}`;
-                      if (skipMap[mapKey]) return; 
-                      const cls = classes.find(c => c.day === activeDay && c.roomId === room && Math.abs(c.startMin - slot.min) < 1);
-                      if (cls) {
-                          const rowSpan = Math.ceil(cls.duration * 2); const style = getClassStyle(cls);
-                          html += `<td rowspan="${rowSpan}" style="background-color: ${style.backgroundColor}; color: ${style.color}; border: 1px solid #d1d5db; padding: 4px; vertical-align: middle;"><div style="font-weight: bold; font-size: 13px;">${cls.level}</div><div style="font-size: 11px;">${cls.instructor}</div><div style="font-size: 10px; opacity: 0.8;">${cls.studentType} (${cls.count}명)</div></td>`;
-                          for(let i = 1; i < rowSpan; i++) { skipMap[`${rIdx}-${tIdx + i}`] = true; }
-                      } else { html += `<td style="border: 1px solid #e5e7eb;"></td>`; }
+              
+              let fullHtml = "";
+              // Determine which days to export
+              const daysToExport = targetDay === 'ALL' ? DAYS : [targetDay];
+
+              daysToExport.forEach(d => {
+                  // Day Header for multi-day export
+                  if (targetDay === 'ALL') {
+                      fullHtml += `<h2 style="font-family: sans-serif; color: #333;">${DAY_MAP[d]} Schedule</h2>`;
+                  }
+
+                  let html = `<table border="1" style="border-collapse: collapse; text-align: center; font-family: sans-serif; font-size: 12px; margin-bottom: 20px;">`;
+                  html += `<thead><tr><th style="background-color: #e5e7eb; width: 80px; height: 30px;">시간 / 강의실</th>`;
+                  rooms.forEach(r => { html += `<th style="background-color: #e5e7eb; width: 120px;">${r}</th>`; });
+                  html += `</tr></thead><tbody>`;
+                  
+                  const skipMap = {}; 
+                  timeSlots.forEach((slot, tIdx) => {
+                      html += `<tr><td style="background-color: #f3f4f6; font-weight: bold; height: 30px;">${slot.label}</td>`;
+                      rooms.forEach((room, rIdx) => {
+                          const mapKey = `${rIdx}-${tIdx}`;
+                          if (skipMap[mapKey]) return; 
+                          const cls = classes.find(c => c.day === d && c.roomId === room && Math.abs(c.startMin - slot.min) < 1);
+                          if (cls) {
+                              const rowSpan = Math.ceil(cls.duration * 2); const style = getClassStyle(cls);
+                              html += `<td rowspan="${rowSpan}" style="background-color: ${style.backgroundColor}; color: ${style.color}; border: 1px solid #d1d5db; padding: 4px; vertical-align: middle;"><div style="font-weight: bold; font-size: 13px;">${cls.level}</div><div style="font-size: 11px;">${cls.instructor}</div><div style="font-size: 10px; opacity: 0.8;">${cls.studentType} (${cls.count}명)</div></td>`;
+                              for(let i = 1; i < rowSpan; i++) { skipMap[`${rIdx}-${tIdx + i}`] = true; }
+                          } else { html += `<td style="border: 1px solid #e5e7eb;"></td>`; }
+                      });
+                      html += `</tr>`;
                   });
-                  html += `</tr>`;
+                  html += `</tbody></table>`;
+                  fullHtml += html;
               });
-              html += `</tbody></table>`;
-              const blobHtml = new Blob([html], { type: 'text/html' }); const blobText = new Blob(["HTML Format"], { type: 'text/plain' });
+
+              const blobHtml = new Blob([fullHtml], { type: 'text/html' }); const blobText = new Blob(["HTML Format"], { type: 'text/plain' });
               const data = [new ClipboardItem({ "text/html": blobHtml, "text/plain": blobText })];
-              navigator.clipboard.write(data).then(() => { showToast(`📋 ${DAY_MAP[activeDay]} 시간표가 복사되었습니다!`); });
+              navigator.clipboard.write(data).then(() => { 
+                  const msg = targetDay === 'ALL' ? "주간 전체 시간표가 복사되었습니다!" : `${DAY_MAP[targetDay]} 시간표가 복사되었습니다!`;
+                  showToast(`📋 ${msg}`); 
+              });
           };
 
           const exportAsRawString = () => {
@@ -508,7 +613,7 @@
 
           const copyDataForEmbedding = () => {
               const data = {
-                  version: Date.now(), // 타임스탬프 자동 추가
+                  version: Date.now(),
                   rawInput,
                   classes,
                   rooms,
@@ -536,10 +641,11 @@
           
           const allInstructors = useMemo(() => { const names = new Set(classes.map(c => c.instructor)); return Array.from(names).sort(); }, [classes]);
 
-          // --- Render ---
           return (
             <div className="min-h-screen bg-gray-100 text-gray-800 font-sans relative">
               {!licenseAgreed && <LicenseModal onAgree={() => setLicenseAgreed(true)} />}
+              {showAddClassModal && <AddClassModal onClose={() => setShowAddClassModal(false)} onAdd={handleAddManualClass} rooms={rooms} />}
+              
               <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-[100] transition-all duration-300 ${toast.show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
                   <div className="bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium flex items-center gap-2"><span>💾</span> {toast.message}</div>
               </div>
@@ -567,7 +673,7 @@
                               <div className="mb-6">
                                   <h3 className="text-sm font-bold text-gray-700 mb-2">1. 스마트 엑셀 내보내기 (추천)</h3>
                                   <p className="text-xs text-gray-500 mb-3">{DAY_MAP[activeDay]} 시간표를 서식(색상, 병합) 포함하여 복사합니다.</p>
-                                  <button onClick={copyToClipboardWithStyle} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium shadow-sm transition-colors"><Icon path={ICONS.download} size={16} /> 엑셀용 복사하기</button>
+                                  <button onClick={() => copyToClipboardWithStyle(activeDay)} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium shadow-sm transition-colors"><Icon path={ICONS.download} size={16} /> 엑셀용 복사하기</button>
                               </div>
                               <hr className="my-6 border-gray-100" />
                               <div className="mb-6">
@@ -603,57 +709,66 @@
               {/* --- Header --- */}
               <header className="bg-indigo-700 text-white p-4 shadow-md sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2"><Icon path={ICONS.bookOpen} size={24} /><h1 className="text-xl font-bold">School Timetable Manager</h1></div>
-                    
-                    {/* VIEW SOURCE TABS (Personal vs Distributed) */}
-                    <div className="flex bg-indigo-900/50 rounded-lg p-1">
-                        <button 
-                            onClick={() => setViewSource('personal')} 
-                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex flex-col items-center leading-tight ${viewSource === 'personal' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}
-                        >
-                            <span>내 시간표 (Personal)</span>
-                            <span className="text-[10px] opacity-70">{formatTime(localStorage.getItem(STORAGE_KEYS.VERSION))}</span>
-                        </button>
-                        <button 
-                            onClick={() => setViewSource('distributed')} 
-                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex flex-col items-center leading-tight ${viewSource === 'distributed' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}
-                        >
-                            <span>배포된 원본 (Distributed)</span>
-                            <span className="text-[10px] opacity-70">{formatTime(distVersion)}</span>
-                        </button>
+                  {/* Left Side: Logo & Navigation */}
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto">
+                    <div className="flex items-center gap-2 mr-4">
+                        <Icon path={ICONS.bookOpen} size={24} />
+                        <h1 className="text-xl font-bold whitespace-nowrap">School Timetable Manager</h1>
                     </div>
+                    
+                    <div className="flex flex-wrap gap-2">
+                        {/* VIEW SOURCE TABS (Moved to Left) */}
+                        <div className="flex bg-indigo-900/50 rounded-lg p-1">
+                            <button 
+                                onClick={() => setViewSource('personal')} 
+                                className={`px-3 py-1 rounded-md text-xs font-medium transition-all flex flex-col items-center leading-tight ${viewSource === 'personal' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}
+                            >
+                                <span>내 시간표</span>
+                                <span className="text-[9px] opacity-70 hidden sm:inline">{formatTime(localStorage.getItem(STORAGE_KEYS.VERSION))}</span>
+                            </button>
+                            <button 
+                                onClick={() => setViewSource('distributed')} 
+                                className={`px-3 py-1 rounded-md text-xs font-medium transition-all flex flex-col items-center leading-tight ${viewSource === 'distributed' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}
+                            >
+                                <span>배포된 원본</span>
+                                <span className="text-[9px] opacity-70 hidden sm:inline">{formatTime(distVersion)}</span>
+                            </button>
+                        </div>
 
-                    {/* VIEW MODE TABS (Dashboard vs Weekly) */}
-                    <div className="flex bg-indigo-900/50 rounded-lg p-1">
-                        <button onClick={() => setViewMode('dashboard')} className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'dashboard' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}>Dashboard</button>
-                        <button onClick={() => setViewMode('weekly')} className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${viewMode === 'weekly' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}>Weekly</button>
+                        {/* VIEW MODE TABS (Moved to Left) */}
+                        <div className="flex bg-indigo-900/50 rounded-lg p-1">
+                            <button onClick={() => setViewMode('dashboard')} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'dashboard' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}>대시보드</button>
+                            <button onClick={() => setViewMode('weekly')} className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'weekly' ? 'bg-white text-indigo-700 shadow-sm' : 'text-indigo-200 hover:text-white'}`}>주간 전체</button>
+                        </div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-3 text-sm">
-                     {/* Reset to Distributed Button (Only visible in Personal Mode) */}
-                     {viewSource === 'personal' && PRELOADED_DATA && (
-                         <button onClick={resetToDistributed} className="flex items-center gap-1 bg-yellow-500/20 border border-yellow-400/50 hover:bg-yellow-500/40 px-3 py-1.5 rounded-lg transition-colors text-yellow-100" title="Reset to Distributed Version">
-                           <Icon path={ICONS.refresh} size={14} /><span className="hidden sm:inline">Reset to Orig</span>
-                         </button>
-                     )}
-
-                     <button onClick={() => setShowClearModal(true)} className="flex items-center gap-1 bg-red-500/20 border border-red-400/50 hover:bg-red-500/40 px-3 py-1.5 rounded-lg transition-colors text-red-100"><Icon path={ICONS.trash2} size={14} /><span className="hidden sm:inline">Clear</span></button>
-                     <button onClick={() => setShowImportExportModal(true)} className="flex items-center gap-1 bg-green-600 border border-green-500 hover:bg-green-500 px-3 py-1.5 rounded-lg transition-colors"><Icon path={ICONS.table} size={14} /><span>Data / File</span></button>
-                     
-                     <div className="h-6 w-px bg-indigo-500 mx-1 hidden sm:block"></div>
-                     
-                     <div className="flex items-center gap-2 bg-indigo-800 rounded-lg p-1 px-2">
+                  {/* Right Side: Actions */}
+                  <div className="flex items-center gap-2 text-sm ml-auto">
+                     <div className="flex items-center gap-2 bg-indigo-800 rounded-lg p-1 px-2 mr-2">
                         <Icon path={ICONS.palette} size={14} className="text-indigo-200" />
                         <select value={colorScheme} onChange={(e) => setColorScheme(e.target.value)} className="bg-indigo-900 text-white border-none rounded text-xs p-1 focus:ring-0 cursor-pointer outline-none"><option value="type">Type</option><option value="instructor">Teacher</option><option value="level">Level</option></select>
                      </div>
-                     <button onClick={() => setShowPrefModal(true)} className="flex items-center gap-1 bg-indigo-600 border border-indigo-500 hover:bg-indigo-500 px-3 py-1.5 rounded-lg transition-colors"><Icon path={ICONS.settings} size={14} /></button>
+
+                     {/* 1. Data/File (Green) */}
+                     <button onClick={() => setShowImportExportModal(true)} className="flex items-center gap-1 bg-green-600 border border-green-500 hover:bg-green-500 px-3 py-1.5 rounded-lg transition-colors shadow-sm"><Icon path={ICONS.table} size={14} /><span className="hidden sm:inline">Data/File</span></button>
+                     
+                     {/* 2. Preferences (White/Purple) */}
+                     <button onClick={() => setShowPrefModal(true)} className="flex items-center gap-1 bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-50 px-3 py-1.5 rounded-lg transition-colors shadow-sm">
+                        <Icon path={ICONS.settings} size={14} />
+                        <span className="hidden sm:inline">Preferred Classrooms</span>
+                     </button>
+
+                     {/* 3. Clear (Red) */}
+                     <button onClick={() => setShowClearModal(true)} className="flex items-center gap-1 bg-red-600 border border-red-500 hover:bg-red-500 px-3 py-1.5 rounded-lg transition-colors text-white shadow-sm" title="Clear All Data">
+                       <Icon path={ICONS.trash2} size={14} />
+                       <span className="hidden sm:inline">Clear</span>
+                     </button>
                   </div>
                 </div>
                 {/* Read Only Banner */}
                 {viewSource === 'distributed' && (
-                    <div className="bg-yellow-100 text-yellow-800 text-center text-xs py-1 font-bold">
+                    <div className="bg-yellow-100 text-yellow-800 text-center text-xs py-1 font-bold mt-2 rounded">
                         ⚠️ 현재 '배포된 원본' 모드입니다. 수정이 불가능합니다. 수정을 원하시면 '내 시간표' 탭을 선택하세요.
                     </div>
                 )}
@@ -670,7 +785,13 @@
                             {parseError && <div className="mt-3 bg-red-50 rounded border border-red-200 overflow-hidden"><div className="p-2 bg-red-100 text-red-800 text-xs font-bold flex items-center gap-2"><Icon path={ICONS.xCircle} size={14} /> {parseError}</div><div className="max-h-32 overflow-y-auto p-2"><ul className="space-y-1">{failedLines.map((line, idx) => <li key={idx} className="text-[10px] text-red-600 font-mono bg-white border border-red-100 p-1 rounded break-all">{line}</li>)}</ul></div></div>}
                           </div>
                           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 h-[500px] flex flex-col">
-                            <div className="flex justify-between items-center mb-3"><h2 className="font-bold text-gray-700 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={18} className="text-orange-500" /> Unassigned</h2><span className="text-xs bg-gray-200 px-2 py-0.5 rounded-full">{unassignedClasses.length}</span></div>
+                            <div className="flex justify-between items-center mb-3">
+                                <h2 className="font-bold text-gray-700 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={18} className="text-orange-500" /> Unassigned Lectures</h2>
+                                <div className="flex items-center gap-2">
+                                    <button onClick={() => setShowAddClassModal(true)} disabled={viewSource !== 'personal'} className={`p-1 rounded bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition-colors ${viewSource !== 'personal' && 'opacity-50 cursor-not-allowed'}`} title="Add New Lecture"><Icon path={ICONS.plus} size={14} /><span className="text-xs font-bold ml-1">New</span></button>
+                                    <span className="text-xs bg-gray-200 px-2 py-0.5 rounded-full">{unassignedClasses.length}</span>
+                                </div>
+                            </div>
                             {unassignedClasses.length > 0 && <button onClick={autoAssignClasses} disabled={viewSource !== 'personal'} className={`mb-3 w-full text-white text-xs font-bold py-2 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-all active:scale-95 ${viewSource !== 'personal' ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600'}`}><Icon path={ICONS.wand2} size={14} /> Magic Auto-Assign</button>}
                             <div className="overflow-y-auto flex-1 space-y-3 pr-1">
                               {unassignedClasses.length === 0 ? <p className="text-xs text-gray-400 text-center mt-10">No unassigned classes.</p> : unassignedClasses.map(cls => (
@@ -683,7 +804,7 @@
                             <div className="flex bg-gray-100 p-1 rounded-lg overflow-x-auto no-scrollbar mb-4">
                               {DAYS.map(day => (<button key={day} onClick={() => setActiveDay(day)} className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all whitespace-nowrap ${activeDay === day ? 'bg-white text-indigo-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>{day}</button>))}
                             </div>
-                            <div style={{ height: '600px' }}><DayTimetable day={activeDay} rooms={rooms} classes={classes} onAssignRoom={assignRoom} getClassStyle={getClassStyle} readOnly={viewSource !== 'personal'} /></div>
+                            <div style={{ height: '600px' }}><DayTimetable day={activeDay} rooms={rooms} classes={classes} onAssignRoom={assignRoom} getClassStyle={getClassStyle} readOnly={viewSource !== 'personal'} onExportExcel={copyToClipboardWithStyle} /></div>
                         </div>
                         <div className="lg:col-span-3 space-y-6">
                           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
@@ -707,7 +828,24 @@
                         </div>
                     </div>
                 )}
-                {viewMode === 'weekly' && (<div className="space-y-8">{DAYS.map(day => (<div key={day} className="w-full h-[600px]"><DayTimetable day={day} rooms={rooms} classes={classes} onAssignRoom={assignRoom} getClassStyle={getClassStyle} fullWidth={true} readOnly={viewSource !== 'personal'} /></div>))}</div>)}
+                
+                {/* Weekly View with Contextual Excel Export */}
+                {viewMode === 'weekly' && (
+                    <div className="relative">
+                        <div className="absolute top-0 right-0 z-20 p-2">
+                            <button 
+                                onClick={() => copyToClipboardWithStyle('ALL')}
+                                className="flex items-center gap-1 px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium shadow-md transition-colors"
+                            >
+                                <Icon path={ICONS.download} size={16} />
+                                <span>주간 전체 엑셀 복사</span>
+                            </button>
+                        </div>
+                        <div className="space-y-8 pt-12">
+                            {DAYS.map(day => (<div key={day} className="w-full h-[600px]"><DayTimetable day={day} rooms={rooms} classes={classes} onAssignRoom={assignRoom} getClassStyle={getClassStyle} fullWidth={true} readOnly={viewSource !== 'personal'} onExportExcel={copyToClipboardWithStyle} /></div>))}
+                        </div>
+                    </div>
+                )}
               </main>
             </div>
           );
