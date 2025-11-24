@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Timetable Manager (Vertical UI)</title>
+    <title>School Timetable Manager v1.3</title>
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234f46e5%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><rect x=%223%22 y=%224%22 width=%2218%22 height=%2218%22 rx=%222%22 ry=%222%22></rect><line x1=%2216%22 y1=%222%22 x2=%2216%22 y2=%226%22></line><line x1=%228%22 y1=%222%22 x2=%228%22 y2=%226%22></line><line x1=%223%22 y1=%2210%22 x2=%2221%22 y2=%2210%22></line><line x1=%229%22 y1=%2210%22 x2=%229%22 y2=%2222%22></line><line x1=%2215%22 y1=%2210%22 x2=%2215%22 y2=%2222%22></line></svg>" />
@@ -14,11 +14,11 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar-thumb { background: #c7c7cc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .modal-backdrop { animation: fadeIn 0.2s ease-out; }
     </style>
@@ -73,7 +73,7 @@
             code: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
             fileText: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8",
             lock: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
-            refresh: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            externalLink: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" // 외부 링크 아이콘
         };
 
         const PASTEL_PALETTE = [
@@ -88,9 +88,11 @@
             '금': 'Friday', '토': 'Saturday', '일': 'Sunday'
           };
 
-        // --- License Modal ---
+        // --- License Modal (Improved) ---
         const LicenseModal = ({ onAgree }) => {
             const [checked, setChecked] = useState(false);
+            const [showDetail, setShowDetail] = useState(false);
+
             return (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center modal-backdrop">
                     <div className="absolute inset-0 bg-gray-900 bg-opacity-90 backdrop-blur-md"></div>
@@ -98,18 +100,51 @@
                         <div className="text-center mb-6">
                             <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4"><Icon path={ICONS.bookOpen} size={32} /></div>
                             <h1 className="text-2xl font-bold text-gray-800 mb-2">School Timetable Manager</h1>
-                            <p className="text-sm text-gray-500">오픈 소스 시간표 관리 프로그램</p>
+                            <p className="text-sm text-gray-500">시간표 관리 프로그램</p>
                         </div>
+                        
                         <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 mb-6 text-sm text-gray-600 leading-relaxed">
-                            <h3 className="font-bold text-gray-800 mb-2 flex items-center gap-2"><Icon path={ICONS.lock} size={16} /> 라이선스 안내 (CC BY-NC-ND 4.0)</h3>
-                            <p className="mb-3">Github 배포 / Creative Commons BY-NC-ND 4.0 라이선스</p>
+                            <h3 className="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                                <Icon path={ICONS.lock} size={16} /> 라이선스 요약 (CC BY-NC-ND 4.0)
+                            </h3>
                             <ul className="list-disc pl-5 space-y-1 mb-3 text-xs">
-                                <li><strong>저작자 표시 (Attribution):</strong> 원작자를 표시해야 합니다.</li>
-                                <li><strong>비영리 (NonCommercial):</strong> 영리 목적으로 이용할 수 없습니다.</li>
-                                <li><strong>변경 금지 (NoDerivatives):</strong> 리믹스, 변형, 2차적 저작물을 작성할 수 없습니다.</li>
+                                <li><strong>저작자 표시:</strong> 원작자를 표시해야 합니다.</li>
+                                <li><strong>비영리:</strong> 영리 목적으로 이용할 수 없습니다.</li>
+                                <li><strong>변경 금지:</strong> 리믹스, 변형, 2차적 저작물 작성 불가.</li>
                             </ul>
-                            <p className="text-xs text-gray-400 mt-2">* 상세 내용은 <code>License.md</code> 파일 참조.</p>
+                            
+                            <div className="flex gap-2 mt-3 border-t border-gray-200 pt-3">
+                                {/* 버튼: 내부 펼치기 */}
+                                <button 
+                                    onClick={() => setShowDetail(!showDetail)}
+                                    className="flex-1 text-xs bg-white border border-gray-300 hover:bg-gray-100 px-3 py-1.5 rounded text-gray-700 font-medium transition-colors"
+                                >
+                                    {showDetail ? "▲ 간략히" : "▼ 라이선스 전문 펼쳐보기"}
+                                </button>
+
+                                {/* 버튼: GitHub 외부 링크 (수정된 URL) */}
+                                <a 
+                                    href="https://github.com/devinweston36-star/School-Timetable-Manager/blob/main/LICENSE.md" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="flex-1 flex items-center justify-center gap-1 text-xs bg-gray-800 hover:bg-gray-900 text-white px-3 py-1.5 rounded font-medium transition-colors"
+                                >
+                                    <span>GitHub에서 보기</span>
+                                    <Icon path={ICONS.externalLink} size={10} />
+                                </a>
+                            </div>
+
+                            {/* 전문 보기 영역 (펼쳐짐) */}
+                            {showDetail && (
+                                <div className="mt-3 p-3 bg-white border border-gray-200 rounded text-[10px] h-40 overflow-y-auto leading-relaxed text-gray-500 font-mono">
+                                    <strong>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</strong><br/><br/>
+                                    By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License ("Public License")...<br/><br/>
+                                    (이하 생략... 전체 내용은 GitHub 링크를 확인하세요)<br/><br/>
+                                    본 프로그램은 사용자의 편의를 위해 제공되며, 어떠한 형태의 보증도 제공하지 않습니다.
+                                </div>
+                            )}
                         </div>
+
                         <div className="flex flex-col gap-4">
                             <label className="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                                 <input type="checkbox" className="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
@@ -163,7 +198,7 @@
             );
         };
 
-        // --- DayTimetable Component (Fixed Color Picker Placement) ---
+        // --- DayTimetable Component ---
         const DayTimetable = React.memo(({ day, rooms, classes, onAssignRoom, getClassStyle, fullWidth = false, readOnly = false, onExportExcel, colorScheme, setColorScheme }) => {
             const dayClasses = classes.filter(c => c.day === day && c.roomId);
             const totalMinutes = (END_HOUR - START_HOUR) * 60;
@@ -174,7 +209,6 @@
                         <div className="flex items-center gap-4">
                             <span>{DAY_MAP[day]} ({day})</span>
                             
-                            {/* --- Color Picker moved INSIDE Timetable Header --- */}
                             <div className="flex items-center gap-2 bg-white/50 border border-gray-200/50 rounded-lg p-0.5 px-2">
                                 <Icon path={ICONS.palette} size={12} className="text-gray-400" />
                                 <select 
@@ -472,12 +506,20 @@
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60] p-4"><div className="bg-white rounded-xl shadow-2xl w-full max-w-lg flex flex-col max-h-[80vh]"><div className="p-4 border-b border-gray-200 flex justify-between items-center"><h2 className="font-bold text-lg flex items-center gap-2"><span className="text-indigo-600"><Icon path={ICONS.settings} size={20} /></span> Preferred Classrooms</h2><button onClick={() => setShowPrefModal(false)} className="p-1 hover:bg-gray-100 rounded-full"><Icon path={ICONS.x} size={20} className="text-gray-500" /></button></div><div className="p-4 overflow-y-auto flex-1">{allInstructors.length === 0 ? <p className="text-center text-gray-400 py-8">No info</p> : <div className="space-y-3">{allInstructors.map(name => (<div key={name} className="flex justify-between items-center text-sm border p-2 rounded bg-gray-50"><span className="font-medium text-gray-800">{name}</span><select className="border rounded p-1.5 w-40 text-sm bg-white" value={instructorPrefs[name] || ""} onChange={(e) => setInstructorPrefs(prev => ({ ...prev, [name]: e.target.value }))}><option value="">-- None --</option>{rooms.map(r => <option key={r} value={r}>{r}</option>)}</select></div>))}</div>}</div><div className="p-4 border-t border-gray-200 bg-gray-50 rounded-b-xl flex justify-end gap-2"><button onClick={() => setShowPrefModal(false)} className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition-colors">Done</button></div></div></div>
               )}
 
-              {/* --- HEADER (Minimal) --- */}
-              <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 h-16 flex items-center justify-center">
-                <div className="flex items-center gap-2 text-indigo-700">
-                    <Icon path={ICONS.bookOpen} size={28} />
-                    <h1 className="text-2xl font-bold tracking-tight">School Timetable Manager</h1>
+              {/* HEADER - FINAL IMPROVED UI - REMOVED BUTTONS FROM HEADER */}
+              <header className="bg-indigo-700 text-white p-4 shadow-md sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto flex items-center justify-center">
+                    <div className="flex items-center gap-2">
+                        <Icon path={ICONS.bookOpen} size={24} />
+                        <h1 className="text-xl font-bold whitespace-nowrap">School Timetable Manager</h1>
+                    </div>
                 </div>
+                {/* Read Only Banner */}
+                {viewSource === 'distributed' && (
+                    <div className="bg-yellow-100 text-yellow-800 text-center text-xs py-1 font-bold mt-2 rounded max-w-7xl mx-auto">
+                        ⚠️ Read-Only Mode (Distributed Version). Switch to 'Personal' to edit.
+                    </div>
+                )}
               </header>
 
               <main className="min-w-full p-4 flex justify-center">
@@ -528,7 +570,7 @@
                                   </div>
                                   <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 h-[500px] flex flex-col">
                                     <div className="flex justify-between items-center mb-3">
-                                        <h2 className="font-bold text-gray-700 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={18} className="text-orange-500" /> Unassigned</h2>
+                                        <h2 className="font-bold text-gray-700 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={18} className="text-orange-500" /> Unassigned Lectures</h2>
                                         <div className="flex items-center gap-2">
                                             <button onClick={() => setShowAddClassModal(true)} disabled={viewSource !== 'personal'} className={`p-1 px-2 rounded bg-indigo-100 text-indigo-700 hover:bg-indigo-200 transition-colors flex items-center gap-1 ${viewSource !== 'personal' && 'opacity-50 cursor-not-allowed'}`} title="Add New Lecture"><Icon path={ICONS.plus} size={14} /><span className="text-xs font-bold">New</span></button>
                                             <span className="text-xs bg-gray-200 px-2 py-0.5 rounded-full">{unassignedClasses.length}</span>
