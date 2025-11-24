@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Timetable Manager v1.3</title>
+    <title>School Timetable Manager (Pro UI)</title>
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234f46e5%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><rect x=%223%22 y=%224%22 width=%2218%22 height=%2218%22 rx=%222%22 ry=%222%22></rect><line x1=%2216%22 y1=%222%22 x2=%2216%22 y2=%226%22></line><line x1=%228%22 y1=%222%22 x2=%228%22 y2=%226%22></line><line x1=%223%22 y1=%2210%22 x2=%2221%22 y2=%2210%22></line><line x1=%229%22 y1=%2210%22 x2=%229%22 y2=%2222%22></line><line x1=%2215%22 y1=%2210%22 x2=%2215%22 y2=%2222%22></line></svg>" />
@@ -45,7 +45,7 @@
             CLASSES: 'stm_classes',
             ROOMS: 'stm_rooms',
             PREFS: 'stm_instructor_prefs',
-            LICENSE_AGREED: 'stm_license_agreed',
+            // LICENSE_AGREED 키 제거 (매번 확인하기 위해)
             VERSION: 'stm_version' 
         };
 
@@ -88,7 +88,7 @@
             '금': 'Friday', '토': 'Saturday', '일': 'Sunday'
           };
 
-        // --- License Modal (Improved) ---
+        // --- License Modal (Always Show) ---
         const LicenseModal = ({ onAgree }) => {
             const [checked, setChecked] = useState(false);
             const [showDetail, setShowDetail] = useState(false);
@@ -122,7 +122,7 @@
                                     {showDetail ? "▲ 간략히" : "▼ 라이선스 전문 펼쳐보기"}
                                 </button>
 
-                                {/* 버튼: GitHub 외부 링크 (수정된 URL) */}
+                                {/* 버튼: GitHub 외부 링크 */}
                                 <a 
                                     href="https://github.com/devinweston36-star/School-Timetable-Manager/blob/main/LICENSE.md" 
                                     target="_blank" 
@@ -277,7 +277,7 @@
             );
         });
 
-        // --- ClassCard Component (Unchanged) ---
+        // --- ClassCard Component ---
         const ClassCard = React.memo(({ cls, compact = false, isEditing, editForm, onEditStart, onEditCancel, onEditSave, onEditChange, onAssignRoom, onDeleteClass, rooms, getClassStyle, readOnly = false }) => {
             const style = getClassStyle(cls);
             if (isEditing && !readOnly) {
@@ -310,7 +310,9 @@
         const App = () => {
           const [viewMode, setViewMode] = useState('dashboard'); 
           const [viewSource, setViewSource] = useState('personal'); 
-          const [licenseAgreed, setLicenseAgreed] = useState(() => localStorage.getItem(STORAGE_KEYS.LICENSE_AGREED) === 'true');
+          // 라이선스 동의 상태 초기값을 false로 설정하여 항상 모달을 띄움
+          const [licenseAgreed, setLicenseAgreed] = useState(false);
+
           const formatTime = (ts) => ts ? new Date(parseInt(ts)).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '없음';
           const loadLocalData = (key, defaultVal) => { const saved = localStorage.getItem(key); return saved ? JSON.parse(saved) : defaultVal; };
 
@@ -357,7 +359,8 @@
               }
           }, [viewSource]);
 
-          useEffect(() => { localStorage.setItem(STORAGE_KEYS.LICENSE_AGREED, licenseAgreed); }, [licenseAgreed]);
+          // LICENSE_AGREED 저장 로직 제거 (항상 묻기 위해)
+
           useEffect(() => {
               if (viewSource === 'personal') {
                   localStorage.setItem(STORAGE_KEYS.RAW_INPUT, rawInput);
@@ -570,7 +573,7 @@
                                   </div>
                                   <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 h-[500px] flex flex-col">
                                     <div className="flex justify-between items-center mb-3">
-                                        <h2 className="font-bold text-gray-700 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={18} className="text-orange-500" /> Unassigned Lectures</h2>
+                                        <h2 className="font-bold text-gray-700 flex items-center gap-2"><Icon path={ICONS.alertCircle} size={18} className="text-orange-500" /> Unassigned</h2>
                                         <div className="flex items-center gap-2">
                                             <button onClick={() => setShowAddClassModal(true)} disabled={viewSource !== 'personal'} className={`p-1 px-2 rounded bg-indigo-100 text-indigo-700 hover:bg-indigo-200 transition-colors flex items-center gap-1 ${viewSource !== 'personal' && 'opacity-50 cursor-not-allowed'}`} title="Add New Lecture"><Icon path={ICONS.plus} size={14} /><span className="text-xs font-bold">New</span></button>
                                             <span className="text-xs bg-gray-200 px-2 py-0.5 rounded-full">{unassignedClasses.length}</span>
