@@ -267,7 +267,7 @@
           const loadLocalData = (key, defaultVal) => { const saved = localStorage.getItem(key); return saved ? JSON.parse(saved) : defaultVal; };
 
           // States
-          const [rawInput, setRawInput] = useState(() => { const saved = localStorage.getItem(STORAGE_KEYS.RAW_INPUT); return saved || "CDI_내신(동아윤1)_월5(M) (17:00~19:00) [6명] Nahyun Kang\nC2D_Albatross_월7(M) (19:00~22:00) [3명] Olivia Constable\nCDI_Birdie_화5(E) (16:00~18:30) [8명] John Doe\nTO_Originator_화7(M)_1 (19:00~22:00) [4명] Jane Smith"; });
+          const [rawInput, setRawInput] = useState(() => { const saved = localStorage.getItem(STORAGE_KEYS.RAW_INPUT); return saved || "C2D_Albatross_월7(M) (19:00~22:00) [3명] John Doe\nTO_Originator_화7(M)_1 (19:00~22:00) [4명] Jane Doe"; });
           const [classes, setClasses] = useState(() => loadLocalData(STORAGE_KEYS.CLASSES, []));
           const [rooms, setRooms] = useState(() => loadLocalData(STORAGE_KEYS.ROOMS, ['401', '402', '403', '404', '405', '406', '407', '601', '602', '603', '605', '606', '607']));
           const [instructorPrefs, setInstructorPrefs] = useState(() => loadLocalData(STORAGE_KEYS.PREFS, {}));
